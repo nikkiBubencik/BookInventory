@@ -3,12 +3,6 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-	/*
-	 * TO-DO: Define a function that retrives ALL customer and order info from the database based on values entered into form.
-	 		  - Write SQL query to retrieve ALL customer and order info based on form values
-	 		  - Execute the SQL query using the pdo function and fetch the result
-	 		  - Return the order info
-	 */
 
 	function find_lists_by_name(PDO $pdo, string $listName){
 		$sql = "SELECT *
@@ -77,17 +71,17 @@
 
 		    <div class="header-right">
 		    	<ul>
-		    		<li><a href="order.php">Lists</a></li>
+		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
 		</header>
 
 		<main>
 
-			<div class="order-lookup-container">
-				<div class="order-lookup-container">
+			<div class="list-lookup-container">
+				<div class="list-lookup-container">
 					<h1>List Lookup</h1>
-					<form action="order.php" method="POST">
+					<form action="list.php" method="POST">
 						<div class="form-group">
 							<label for="listName">List Name:</label>
 						        <input type="text" id="listName" name="listName" required>
@@ -101,7 +95,7 @@
 				    	<h2>Your Lists</h2>
 				    	<ul>
 				        <?php foreach ($allLists as $list): ?>
-				            <li><a href="list.php?listID=<?= $list['listID'] ?>&title=<? $list['list_name'] ?>">
+				            <li><a href="list_books.php?listID=<?= $list['listID'] ?>&title=<? $list['list_name'] ?>">
 						<?= $list['list_name'] ?></a></li>
 				        <?php endforeach; ?>
 				    	</ul>
