@@ -5,7 +5,7 @@
 
 	// Retrieve the value of the 'toynum' parameter from the URL query string
 	//		i.e., ../toy.php?toynum=0001
-	$toy_id = $_GET['toynum'];
+	$toy_id = $_GET['bookID'];
 
 
 	/*
@@ -16,17 +16,17 @@
 
 	 		  Retrieve info about toy from the db using provided PDO connection
 	 */
-	function toy_info(PDO $pdo, string $id){
-		$sql = " SELECT toy.* , toy.name AS toy_name, manuf.*, manuf.name AS manuf_name
-				FROM toy join manuf ON toy.manid = manuf.manid
-				WHERE toy.toynum= :id;";
+	function book_info(PDO $pdo, string $id){
+		$sql = " SELECT book.* , book.title AS book_title
+				FROM book
+				WHERE toy.bookID= :id;";
 
-		$info = pdo($pdo, $sql, ['id' => $id])->fetch();	
+		$info = pdo($pdo, $sql, ['bookID' => $id])->fetch();	
 
 		return $info;
 	}
 
-	$info = toy_info($pdo, $toy_id);
+	$info = book_info($pdo, $bookID);
 
 // Closing PHP tag  ?> 
 
@@ -53,7 +53,7 @@
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Toy Catalog</a></li>
+	      				<li><a href="index.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
@@ -72,35 +72,41 @@
   			  -->
 			
 			<div class="toy-details-container">
-				<div class="toy-image">
+<!-- 				<div class="toy-image">
 					<!-- Display image of toy with its name as alt text -->
 					<img src="<?= $info['imgSrc'] ?>" alt="<?= $info['toy_name'] ?>">
-				</div>
+				</div> -->
 
 				<div class="toy-details">
 
 					<!-- Display name of toy -->
-			        <h1><?= $info['toy_name'] ?></h1>
+			        <h1><?= $info['title'] ?></h1>
 
 			        <hr />
 
-			        <h3>Toy Information</h3>
+			        <h3>Book Information</h3>
 
 			        <!-- Display description of toy -->
-			        <p><strong>Description:</strong> <?= $info['description'] ?></p>
+			        <p><strong>Description:</strong> <?= $info['authors'] ?></p>
 
 			        <!-- Display price of toy -->
-			        <p><strong>Price:</strong> $ <?= $info['price'] ?></p>
+			        <p><strong>Price:</strong> $ <?= $info['avg_rating'] ?></p>
 
 			        <!-- Display age range of toy -->
-			        <p><strong>Age Range:</strong> <?= $info['agerange'] ?></p>
+			        <p><strong>Age Range:</strong> <?= $info['ISBN'] ?></p>
 
 			        <!-- Display stock of toy -->
-			        <p><strong>Number In Stock:</strong> <?= $info['numinstock'] ?></p>
+			        <p><strong>Number In Stock:</strong> <?= $info['page_count'] ?></p>
+
+				<p><strong>Number In Stock:</strong> <?= $info['publisher'] ?></p>			        
+				
+				<p><strong>Number In Stock:</strong> <?= $info['year_published'] ?></p>
+
+
 
 			        <br />
 
-			        <h3>Manufacturer Information</h3>
+<!-- 			        <h3>Manufacturer Information</h3>
 
 			        <!-- Display name of manufacturer -->
 			        <p><strong>Name:</strong> <?= $info['manuf_name'] ?> </p>
@@ -112,7 +118,7 @@
 			        <p><strong>Phone:</strong> <?= $info['phone'] ?></p>
 
 			        <!-- Display contact of manufacturer -->
-			        <p><strong>Contact:</strong> <?= $info['contact'] ?></p>
+			        <p><strong>Contact:</strong> <?= $info['contact'] ?></p> -->
 			    </div>
 			</div>
 		</main>
