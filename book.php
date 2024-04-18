@@ -76,27 +76,27 @@
 				<div class="toy-details">
 
 					<!-- Display title of book -->
-			        <h1><?= $info['title'] ?></h1>
+<!-- 			        <h1><?= $info['title'] ?></h1> -->
 
 			        <hr />
 
 			        <h3>Book Information</h3>
 
 			        <!-- Display authors -->
-			        <p><strong>Authors:</strong> <?= $info['authors'] ?></p>
+<!-- 			        <p><strong>Authors:</strong> <?= $info['authors'] ?></p> -->
 
 			        <!-- Display average rating -->
-			        <p><strong>Average Rating:</strong>  <?= $info['avg_rating'] ?></p>
+<!-- 			        <p><strong>Average Rating:</strong>  <?= $info['avg_rating'] ?></p> -->
 
 			        <!-- Display ISBN -->
-			        <p><strong>ISBN:</strong> <?= $info['ISBN'] ?></p>
+<!-- 			        <p><strong>ISBN:</strong> <?= $info['ISBN'] ?></p> -->
 
 			        <!-- Display page count -->
-			        <p><strong>Number of Pages:</strong> <?= $info['page_count'] ?></p>
+<!-- 			        <p><strong>Number of Pages:</strong> <?= $info['page_count'] ?></p> -->
 
-				<p><strong>Publisher:</strong> <?= $info['publisher'] ?></p>			        
+<!-- 				<p><strong>Publisher:</strong> <?= $info['publisher'] ?></p>			         -->
 				
-				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p>
+<!-- 				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p> -->
 
 			    </div>
 			</div>
