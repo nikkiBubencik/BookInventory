@@ -26,7 +26,7 @@
 		return $books;
 	}
 
-	$allBooks = get_books($pdo, listID);
+	$allBooks = get_books($pdo, $listID);
 
 // Closing PHP tag  ?> 
 
