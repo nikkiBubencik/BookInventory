@@ -19,9 +19,9 @@
 	function book_info(PDO $pdo, string $id){
 		$sql = " SELECT book.* , book.title AS book_title
 				FROM book
-				WHERE toy.bookID= :id;";
+				WHERE bookID= :id;";
 
-		$info = pdo($pdo, $sql, ['bookID' => $id])->fetch();	
+		$info = pdo($pdo, $sql, ['id' => $id])->fetch();	
 
 		return $info;
 	}
@@ -72,53 +72,32 @@
   			  -->
 			
 			<div class="toy-details-container">
-<!-- 				<div class="toy-image">
-					<!-- Display image of toy with its name as alt text -->
-					<img src="<?= $info['imgSrc'] ?>" alt="<?= $info['toy_name'] ?>">
-				</div> -->
-
+<!-- 				
 				<div class="toy-details">
 
-					<!-- Display name of toy -->
+					<!-- Display title of book -->
 			        <h1><?= $info['title'] ?></h1>
 
 			        <hr />
 
 			        <h3>Book Information</h3>
 
-			        <!-- Display description of toy -->
-			        <p><strong>Description:</strong> <?= $info['authors'] ?></p>
+			        <!-- Display authors -->
+			        <p><strong>Authors:</strong> <?= $info['authors'] ?></p>
 
-			        <!-- Display price of toy -->
-			        <p><strong>Price:</strong> $ <?= $info['avg_rating'] ?></p>
+			        <!-- Display average rating -->
+			        <p><strong>Average Rating:</strong>  <?= $info['avg_rating'] ?></p>
 
-			        <!-- Display age range of toy -->
-			        <p><strong>Age Range:</strong> <?= $info['ISBN'] ?></p>
+			        <!-- Display ISBN -->
+			        <p><strong>ISBN:</strong> <?= $info['ISBN'] ?></p>
 
-			        <!-- Display stock of toy -->
-			        <p><strong>Number In Stock:</strong> <?= $info['page_count'] ?></p>
+			        <!-- Display page count -->
+			        <p><strong>Number of Pages:</strong> <?= $info['page_count'] ?></p>
 
-				<p><strong>Number In Stock:</strong> <?= $info['publisher'] ?></p>			        
+				<p><strong>Publisher:</strong> <?= $info['publisher'] ?></p>			        
 				
-				<p><strong>Number In Stock:</strong> <?= $info['year_published'] ?></p>
+				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p>
 
-
-
-			        <br />
-
-<!-- 			        <h3>Manufacturer Information</h3>
-
-			        <!-- Display name of manufacturer -->
-			        <p><strong>Name:</strong> <?= $info['manuf_name'] ?> </p>
-
-			        <!-- Display address of manufacturer -->
-					<p><strong>Address:</strong> <?= $info['Street'] ?> <?= $info['City'] ?> <?= $info['State'] ?> <?= $info['ZipCode'] ?></p>
-
-			        <!-- Display phone of manufacturer -->
-			        <p><strong>Phone:</strong> <?= $info['phone'] ?></p>
-
-			        <!-- Display contact of manufacturer -->
-			        <p><strong>Contact:</strong> <?= $info['contact'] ?></p> -->
 			    </div>
 			</div>
 		</main>
