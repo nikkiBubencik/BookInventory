@@ -5,7 +5,7 @@
 
 	// Retrieve the value of the 'toynum' parameter from the URL query string
 	//		i.e., ../toy.php?toynum=0001
-	$toy_id = $_GET['bookID'];
+	$book_id = $_GET['bookID'];
 
 
 	/*
@@ -26,7 +26,7 @@
 		return $info;
 	}
 
-	$info = book_info($pdo, $bookID);
+	$info = book_info($pdo, $book_ID);
 
 // Closing PHP tag  ?> 
 
