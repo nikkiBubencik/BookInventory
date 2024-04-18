@@ -14,8 +14,8 @@
 
 		// SQL query to retrieve toy information based on the toy ID
 		$sql = "SELECT * 
-			FROM users
-			WHERE userID= :id;";	// :id is a placeholder for value provided later 
+			FROM books
+			WHERE bookID= :id;";	// :id is a placeholder for value provided later 
 		                               // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
 
 
@@ -87,10 +87,10 @@
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
 
   					<!-- Display name of toy -->
-  					<h2><?= $book1['first_name'] ?></h2>
+  					<h2><?= $book1['title'] ?></h2>
 
   					<!-- Display price of toy -->
-  					<p>$<?= $book1['last_name'] ?></p>
+  					<p>$<?= $book1['avg_rating'] ?></p>
   				</div>
 
    			</section>
