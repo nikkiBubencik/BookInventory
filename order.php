@@ -3,7 +3,6 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-
 	/*
 	 * TO-DO: Define a function that retrives ALL customer and order info from the database based on values entered into form.
 	 		  - Write SQL query to retrieve ALL customer and order info based on form values
@@ -44,7 +43,7 @@
 	    	return $lists;
 	}
 	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allLists = get_all_user_lists($pdo, '1');
+	$allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
