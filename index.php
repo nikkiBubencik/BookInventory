@@ -3,13 +3,7 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-	/*
-	 * Retrieve toy information from the database based on the toy ID.
-	 * 
-	 * @param PDO $pdo       An instance of the PDO class.
-	 * @param string $id     The ID of the toy to retrieve.
-	 * @return array|null    An associative array containing the toy information, or null if no toy is found.
-	 */
+
 	function get_book(PDO $pdo, string $id) {
 
 		// SQL query to retrieve book information based on the book ID
@@ -22,24 +16,12 @@
 		// Execute the SQL query using the pdo function and fetch the result
 		$book = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
-		// Return the toy information (associative array)
+		// Return the book information (associative array)
 		return $book;
 	}
 
-	// Retrieve info about toy with ID '0001' from the db using provided PDO connection
 	$book1 = get_book($pdo, '2');
-	// $toy2 = get_toy($pdo, '0002');
-	// $toy3 = get_toy($pdo, '0003');
-	// $toy4 = get_toy($pdo, '0004');
-	// $toy5 = get_toy($pdo, '0005');
-	// $toy6 = get_toy($pdo, '0006');
-	// $toy7 = get_toy($pdo, '0007');
-	// $toy8 = get_toy($pdo, '0008');
-	// $toy9 = get_toy($pdo, '0009');
-	// $toy10 = get_toy($pdo, '0010');
-	/*
-	 * TO-DO: Retrieve info for ALL remaining toys from the db
-	 */
+
 
 
 // Closing PHP tag  ?> 
@@ -50,7 +32,7 @@
 	<head>
 		<meta charset="UTF-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  		<title>Toys R URI</title>
+  		<title>Book Inventory</title>
   		<link rel="stylesheet" href="css/style.css">
   		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +44,7 @@
 		<header>
 			<div class="header-left">
 				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Toy R URI Logo">
+					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
       			</div>
 
 	      		<nav>
@@ -75,16 +57,16 @@
 
 		    <div class="header-right">
 		    	<ul>
-		    		<li><a href="order.php">Check Order</a></li>
+		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
 		</header>
 
   		<main>
-  			<section class="toy-catalog">
+  			<section class="book-catalog">
 
-  				<div class="toy-card">
-  					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
+  				<div class="book-card">
+  					<!-- Create a hyperlink to book.php page with book ID as parameter -->
 
   					<!-- Displaytitle of book -->
 					<a href="book.php?bookID=<?= $book1['bookID'] ?>">
