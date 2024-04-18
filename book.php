@@ -17,7 +17,7 @@
 	 		  Retrieve info about toy from the db using provided PDO connection
 	 */
 	function book_info(PDO $pdo, string $id){
-		$sql = " SELECT book.*
+		$sql = " SELECT *
 				FROM books
 				WHERE bookID= :id;";
 
