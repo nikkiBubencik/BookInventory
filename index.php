@@ -85,93 +85,12 @@
 
   				<div class="toy-card">
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
-<!--   					<a href="toy.php?toynum=<?= $toy1['toynum'] ?>">
-
-  						<!-- Display image of toy with its name as alt text -->
-  						<img src="<?= $toy1['imgSrc'] ?>" alt="<?= $toy1['name'] ?>">
-  					</a> -->
 
   					<!-- Display name of toy -->
   					<h2><?= $book1['first_name'] ?></h2>
 
   					<!-- Display price of toy -->
   					<p>$<?= $book1['last_name'] ?></p>
-  				</div> -->
-
-
-  				<!-- 
-				  -- TO DO: Fill in the rest of the cards for ALL remaining toys from the db
-  				  -->
-<!-- 				<div class="toy-card">
-					<a href="toy.php?toynum=<?= $toy2['toynum'] ?>">
-					<img src="<?= $toy2['imgSrc'] ?>" alt="<?= $toy2['name'] ?>">
-					</a>
-					<h2><?= $toy2['name'] ?></h2>
-					<p>$<?= $toy2['price'] ?></p>
-				</div>
-
-				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy3['toynum'] ?>">
-  						<img src="<?= $toy3['imgSrc'] ?>" alt="<?= $toy3['name'] ?>">
-  					</a>
-  					<h2><?= $toy3['name'] ?></h2>
-  					<p>$<?= $toy3['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy4['toynum'] ?>">
-  						<img src="<?= $toy4['imgSrc'] ?>" alt="<?= $toy4['name'] ?>">
-  					</a>
-  					<h2><?= $toy4['name'] ?></h2>
-  					<p>$<?= $toy4['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy5['toynum'] ?>">
-  						<img src="<?= $toy5['imgSrc'] ?>" alt="<?= $toy5['name'] ?>">
-  					</a>
-  					<h2><?= $toy5['name'] ?></h2>
-  					<p>$<?= $toy5['price'] ?></p>
-  				</div>
-  				
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy6['toynum'] ?>">
-  						<img src="<?= $toy6['imgSrc'] ?>" alt="<?= $toy6['name'] ?>">
-  					</a>
-  					<h2><?= $toy6['name'] ?></h2>
-  					<p>$<?= $toy6['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy7['toynum'] ?>">
-  						<img src="<?= $toy7['imgSrc'] ?>" alt="<?= $toy7['name'] ?>">
-  					</a>
-  					<h2><?= $toy7['name'] ?></h2>
-  					<p>$<?= $toy7['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy8['toynum'] ?>">
-  						<img src="<?= $toy8['imgSrc'] ?>" alt="<?= $toy8['name'] ?>">
-  					</a>
-  					<h2><?= $toy8['name'] ?></h2>
-  					<p>$<?= $toy8['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy9['toynum'] ?>">
-  						<img src="<?= $toy9['imgSrc'] ?>" alt="<?= $toy9['name'] ?>">
-  					</a>
-  					<h2><?= $toy9['name'] ?></h2>
-  					<p>$<?= $toy9['price'] ?></p>
-  				</div>
-
-  				<div class="toy-card">
-  					<a href="toy.php?toynum=<?= $toy10['toynum'] ?>">
-  						<img src="<?= $toy10['imgSrc'] ?>" alt="<?= $toy10['name'] ?>">
-  					</a>
-  					<h2><?= $toy10['name'] ?></h2>
-  					<p>$<?= $toy10['price'] ?></p>
   				</div> -->
 
    			</section>
