@@ -32,7 +32,7 @@
 	}
 
 	function get_all_user_lists(PDO $pdo, $userId) {
-	    	$sql = "SELECT * FROM lists WHERE userID = :userId";
+	    	$sql = "SELECT * FROM reading_list WHERE userID = :userId";
 		$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
 
 	    	return $lists;
@@ -92,9 +92,15 @@
 					</form>
 				</div>
 				
-				<!-- 
-				  -- TO-DO: Check if variable holding order is not empty. Make sure to replace null with your variable!
-				  -->
+				<div class="list-names">
+				    	<h2>Your Lists</h2>
+				    	<ul>
+				        <?php foreach ($allLists as $list): ?>
+				            <li><a href="list.php?listID=<?= $list['listID'] ?>">
+						<?= $list['list_name'] ?></a></li>
+				        <?php endforeach; ?>
+				    	</ul>
+				</div>
 				
 				
 
