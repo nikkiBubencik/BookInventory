@@ -3,19 +3,10 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-	// Retrieve the value of the 'toynum' parameter from the URL query string
-	//		i.e., ../toy.php?toynum=0001
 	$book_id = $_GET['bookID'];
 
 
-	/*
-	 * TO-DO: Define a function that retrieves ALL toy and manufacturer info from the database based on the toynum parameter from the URL query string.
-	 		  - Write SQL query to retrieve ALL toy and manufacturer info based on toynum
-	 		  - Execute the SQL query using the pdo function and fetch the result
-	 		  - Return the toy info
 
-	 		  Retrieve info about toy from the db using provided PDO connection
-	 */
 	function book_info(PDO $pdo, string $id){
 		$sql = " SELECT *
 				FROM books
@@ -48,7 +39,7 @@
 		<header>
 			<div class="header-left">
 				<div class="logo">
-					<img src="imgs/logo.png" alt="Toy R URI Logo">
+					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
       			</div>
 
 	      		<nav>
@@ -61,19 +52,16 @@
 
 		    <div class="header-right">
 		    	<ul>
-		    		<li><a href="order.php">Check Order</a></li>
+		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
 		</header>
 
 		<main>
-			<!-- 
-			  -- TO DO: Fill in ALL the placeholders for this toy from the db
-  			  -->
-			
-			<div class="toy-details-container">
+		
+			<div class="book-details-container">
 				
-				<div class="toy-details">
+				<div class="book-details">
 
 					<!-- Display title of book -->
 			        <h1><?= $info['title'] ?></h1>
