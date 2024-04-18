@@ -29,7 +29,7 @@
 
 		    <div class="header-right">
 		    	<ul>
-		    		<li><a href="order.php">Check Order</a></li>
+		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
 		</header>
