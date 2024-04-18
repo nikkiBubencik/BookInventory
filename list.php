@@ -15,7 +15,7 @@
 		// SQL query to retrieve books in a list
 		$sql = "SELECT b.title, b.authors
 			FROM books as b JOIN user_books as ub ON b.bookID = ub.bookID
-			WHERE listID= :id;";	// :id is a placeholder for value provided later 
+			WHERE ub.listID= :id;";	// :id is a placeholder for value provided later 
 		                               // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
 
 
