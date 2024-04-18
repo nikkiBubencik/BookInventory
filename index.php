@@ -87,7 +87,7 @@
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
 
   					<!-- Displaytitle of book -->
-					<a href="toy.php">
+					<a href="toy.php?bookID=<?= $book1['bookID'] ?>">
   						<h2><?= $book1['title'] ?></h2>
 					<a></a>
 
