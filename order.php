@@ -28,7 +28,13 @@
 		$listName = $_POST['listName'];
 
 		$lists = find_lists_by_name($pdo, $listName);
-		
+
+		// Check if the list exists
+		if ($list) {
+			// If the list exists, redirect to list.php with listID parameter
+			header("Location: list.php?listID=" . $list['listID']);
+			exit(); 
+		}
 	}
 
 	function get_all_user_lists(PDO $pdo, $userId) {
