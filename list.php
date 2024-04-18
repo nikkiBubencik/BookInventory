@@ -68,6 +68,8 @@
 
   		<main>
   			<section class="book-catalog">
+				<h1>List Name: <?php echo $listName; ?></h1>
+				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
 		  				<div class="book-card">
@@ -80,6 +82,7 @@
 		  					<!-- Display authors -->
 		  					<p><?= $book['authors'] ?></p>
 							</a>
+							<br>
 		  				</div>
 					<?php endforeach; ?>
 				<?php else : ?>
