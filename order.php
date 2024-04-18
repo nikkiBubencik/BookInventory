@@ -10,14 +10,14 @@
 	 		  - Execute the SQL query using the pdo function and fetch the result
 	 		  - Return the order info
 	 */
-	function cust_order_info(PDO $pdo, string $email, string $orderNum){
+
+	function find_lists_by_name(PDO $pdo, string $listName){
 		$sql = "SELECT *
-				FROM customer JOIN orders on customer.custnum = orders.custnum
-				WHERE customer.email = :email 
-				AND orders.ordernum = :orderNum;";
+				FROM reading_lists
+				WHERE list_name LIKE :listName;";
 		
-		$order = pdo($pdo, $sql, ['email' => $email, 'orderNum' => $orderNum])->fetch();		
-		return $order;
+		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetch();		
+		return $list;
 	}
 
 	
@@ -25,18 +25,20 @@
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		// Retrieve the value of the 'email' field from the POST data
-		$email = $_POST['email'];
+		$listName = $_POST['listName'];
 
-		// Retrieve the value of the 'orderNum' field from the POST data
-		$orderNum = $_POST['orderNum'];
-
-
-		/*
-		 * TO-DO: Retrieve info about order from the db using provided PDO connection
-		 */
-		$orderInfo = cust_order_info($pdo, $email, $orderNum);
+		$lists = find_lists_by_name($pdo, $listName);
 		
 	}
+
+	function get_all_user_lists(PDO $pdo, $userId) {
+	    	$sql = "SELECT * FROM lists WHERE userID = :userId";
+		$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
+
+	    	return $lists;
+	}
+	// CHNAGE '1' to $userId so its for the user who is logged in
+	$allLists = get_all_user_lists($pdo, $userId);
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
@@ -45,7 +47,7 @@
 	<head>
 		<meta charset="UTF-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  		<title>Toys R URI</title>
+  		<title>Book Inventory</title>
   		<link rel="stylesheet" href="css/style.css">
   		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +72,7 @@
 
 		    <div class="header-right">
 		    	<ul>
-		    		<li><a href="order.php">Check Order</a></li>
+		    		<li><a href="order.php">Lists</a></li>
 		    	</ul>
 		    </div>
 		</header>
@@ -79,11 +81,11 @@
 
 			<div class="order-lookup-container">
 				<div class="order-lookup-container">
-					<h1>Order Lookup</h1>
+					<h1>List Lookup</h1>
 					<form action="order.php" method="POST">
 						<div class="form-group">
-							<label for="email">Email:</label>
-							<input type="email" id="email" name="email" required>
+							<label for="listName">List Name:</label>
+						        <input type="text" id="listName" name="listName" required>
 						</div>
 
 						<div class="form-group">
@@ -98,23 +100,16 @@
 				<!-- 
 				  -- TO-DO: Check if variable holding order is not empty. Make sure to replace null with your variable!
 				  -->
+				<div class="list-names">
+				    	<h2>Your Lists</h2>
+				    	<ul>
+				        <?php foreach ($allLists as $list): ?>
+				            <li><a href="list.php?listID=<?= $list['listID'] ?>">
+						<?= $list['list_name'] ?></a></li>
+				        <?php endforeach; ?>
+				    	</ul>
+				</div>
 				
-				<?php if (!empty($orderInfo)): ?>
-					<div class="order-details">
-
-						<!-- 
-				  		  -- TO DO: Fill in ALL the placeholders for this order from the db
-  						  -->
-						<h1>Order Details</h1>
-						<p><strong>Name: </strong> <?= $orderInfo['cname'] ?></p>
-				        	<p><strong>Username: </strong> <?= $orderInfo['username'] ?></p>
-				        	<p><strong>Order Number: </strong> <?= $orderInfo['ordernum'] ?></p>
-				        	<p><strong>Quantity: </strong> <?= $orderInfo['quantity'] ?></p>
-				        	<p><strong>Date Ordered: </strong> <?= $orderInfo['date_ordered'] ?></p>
-				        	<p><strong>Delivery Date: </strong> <?= $orderInfo['date_deliv'] ?></p>
-				      
-					</div>
-				<?php endif; ?>
 
 			</div>
 
