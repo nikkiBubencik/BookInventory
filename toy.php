@@ -17,8 +17,8 @@
 	 		  Retrieve info about toy from the db using provided PDO connection
 	 */
 	function book_info(PDO $pdo, string $id){
-		$sql = " SELECT book.* , book.title AS book_title
-				FROM book
+		$sql = " SELECT book.*
+				FROM books
 				WHERE bookID= :id;";
 
 		$info = pdo($pdo, $sql, ['id' => $id])->fetch();	
@@ -36,7 +36,7 @@
 	<head>
 		<meta charset="UTF-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  		<title>Toys R URI</title>
+  		<title>book Inventory</title>
   		<link rel="stylesheet" href="css/style.css">
   		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
