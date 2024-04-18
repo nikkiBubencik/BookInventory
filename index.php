@@ -89,10 +89,10 @@
   					<!-- Displaytitle of book -->
 					<a href="toy.php?bookID=<?= $book1['bookID'] ?>">
   						<h2><?= $book1['title'] ?></h2>
-					<a></a>
 
   					<!-- Display authors -->
   					<p><?= $book1['authors'] ?></p>
+					</a>
   				</div>
 
    			</section>
