@@ -20,7 +20,7 @@
 
 
 		// Execute the SQL query using the pdo function and fetch the result
-		$book = pdo($pdo, $sql, ['userID' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+		$book = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
 		// Return the toy information (associative array)
 		return $book;
@@ -91,7 +91,7 @@
 
   					<!-- Display price of toy -->
   					<p>$<?= $book1['last_name'] ?></p>
-  				</div> -->
+  				</div>
 
    			</section>
   		</main>
