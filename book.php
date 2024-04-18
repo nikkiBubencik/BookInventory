@@ -86,7 +86,7 @@
 			        <p><strong>Authors:</strong> <?= $info['authors'] ?></p>
 
 			        <!-- Display average rating -->
-			        <p><strong>Average Rating:</strong>  <?= $info['avg_rating'] ?></p>
+			        <p><strong>Average Rating:</strong>  <?= $info['ave_rating'] ?></p>
 
 			        <!-- Display ISBN -->
 			        <p><strong>ISBN:</strong> <?= $info['ISBN'] ?></p>
