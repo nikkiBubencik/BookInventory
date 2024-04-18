@@ -13,10 +13,10 @@
 
 	function find_lists_by_name(PDO $pdo, string $listName){
 		$sql = "SELECT *
-				FROM reading_lists
+				FROM reading_list
 				WHERE list_name LIKE :listName;";
 		
-		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetch();		
+		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetchAll();		
 		return $list;
 	}
 
