@@ -20,10 +20,10 @@
 
 
 		// Execute the SQL query using the pdo function and fetch the result
-		$book = pdo($pdo, $sql, ['id' => $id])->fetchAll();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+		$books = pdo($pdo, $sql, ['id' => $id])->fetchAll();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
 		// Return the book information (associative array)
-		return $book;
+		return $books;
 	}
 
 	$allBooks = get_books($pdo, listID);
@@ -68,20 +68,23 @@
 
   		<main>
   			<section class="book-catalog">
-				<?php foreach ($allBooks as $book): ?>
-	  				<div class="book-card">
-	  					<!-- Create a hyperlink to book.php page with book number as parameter -->
-	
-	  					<!-- Displaytitle of book -->
-						<a href="book.php?bookID=<?= $book['bookID'] ?>">
-	  						<h2><?= $book['title'] ?></h2>
-	
-	  					<!-- Display authors -->
-	  					<p><?= $book['authors'] ?></p>
-						</a>
-	  				</div>
-				<?php endforeach; ?>
-
+				<?php if (!empty($allBooks)) : ?>
+					<?php foreach ($allBooks as $book): ?>
+		  				<div class="book-card">
+		  					<!-- Create a hyperlink to book.php page with book number as parameter -->
+		
+		  					<!-- Displaytitle of book -->
+							<a href="book.php?bookID=<?= $book['bookID'] ?>">
+		  						<h2><?= $book['title'] ?></h2>
+		
+		  					<!-- Display authors -->
+		  					<p><?= $book['authors'] ?></p>
+							</a>
+		  				</div>
+					<?php endforeach; ?>
+				<?php else : ?>
+		                	<p>No books found for this list.</p>
+		            	<?php endif; ?>
    			</section>
   		</main>
 
