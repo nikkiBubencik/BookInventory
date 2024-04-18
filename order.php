@@ -24,7 +24,7 @@
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		// Retrieve the value of the 'email' field from the POST data
+		// Retrieve the value of the 'listName' field from the POST data
 		$listName = $_POST['listName'];
 
 		$lists = find_lists_by_name($pdo, $listName);
@@ -88,27 +88,14 @@
 						        <input type="text" id="listName" name="listName" required>
 						</div>
 
-						<div class="form-group">
-							<label for="orderNum">Order Number:</label>
-							<input type="text" id="orderNum" name="orderNum" required>
-						</div>
-
-						<button type="submit">Lookup Order</button>
+						<button type="submit">Lookup List</button>
 					</form>
 				</div>
 				
 				<!-- 
 				  -- TO-DO: Check if variable holding order is not empty. Make sure to replace null with your variable!
 				  -->
-				<div class="list-names">
-				    	<h2>Your Lists</h2>
-				    	<ul>
-				        <?php foreach ($allLists as $list): ?>
-				            <li><a href="list.php?listID=<?= $list['listID'] ?>">
-						<?= $list['list_name'] ?></a></li>
-				        <?php endforeach; ?>
-				    	</ul>
-				</div>
+				
 				
 
 			</div>
