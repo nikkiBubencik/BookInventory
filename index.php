@@ -14,20 +14,20 @@
 
 		// SQL query to retrieve toy information based on the toy ID
 		$sql = "SELECT * 
-			FROM books
-			WHERE bookID= :id;";	// :id is a placeholder for value provided later 
+			FROM users
+			WHERE userID= :id;";	// :id is a placeholder for value provided later 
 		                               // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
 
 
 		// Execute the SQL query using the pdo function and fetch the result
-		$book = pdo($pdo, $sql, ['bookID' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+		$book = pdo($pdo, $sql, ['userID' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
 		// Return the toy information (associative array)
 		return $book;
 	}
 
 	// Retrieve info about toy with ID '0001' from the db using provided PDO connection
-	// $book1 = get_book($pdo, '2');
+	$book1 = get_book($pdo, '2');
 	// $toy2 = get_toy($pdo, '0002');
 	// $toy3 = get_toy($pdo, '0003');
 	// $toy4 = get_toy($pdo, '0004');
@@ -81,9 +81,9 @@
 		</header>
 
   		<main>
-<!--   			<section class="book-catalog">
+  			<section class="toy-catalog">
 
-  				<div class="book-card">
+  				<div class="toy-card">
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
 <!--   					<a href="toy.php?toynum=<?= $toy1['toynum'] ?>">
 
@@ -92,10 +92,10 @@
   					</a> -->
 
   					<!-- Display name of toy -->
-  					<h2><?= $book1['title'] ?></h2>
+  					<h2><?= $book1['first_name'] ?></h2>
 
   					<!-- Display price of toy -->
-  					<p>$<?= $book1['authors'] ?></p>
+  					<p>$<?= $book1['last_name'] ?></p>
   				</div> -->
 
 
@@ -174,7 +174,7 @@
   					<p>$<?= $toy10['price'] ?></p>
   				</div> -->
 
-<!--   			</section> -->
+   			</section>
   		</main>
 
 	</body>
