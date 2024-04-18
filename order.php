@@ -38,7 +38,7 @@
 	    	return $lists;
 	}
 	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allLists = get_all_user_lists($pdo, $userId);
+	$allLists = get_all_user_lists($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
