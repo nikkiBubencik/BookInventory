@@ -101,7 +101,7 @@
 				    	<h2>Your Lists</h2>
 				    	<ul>
 				        <?php foreach ($allLists as $list): ?>
-				            <li><a href="list.php?listID=<?= $list['listID'] ?>">
+				            <li><a href="list.php?listID=<?= $list['listID'] ?>&title=<? $list[$list_name'] ?>">
 						<?= $list['list_name'] ?></a></li>
 				        <?php endforeach; ?>
 				    	</ul>
