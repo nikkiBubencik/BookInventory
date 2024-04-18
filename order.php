@@ -57,12 +57,12 @@
 		<header>
 			<div class="header-left">
 				<div class="logo">
-					<img src="imgs/logo.png" alt="Toy R URI Logo">
+					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
       			</div>
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Toy Catalog</a></li>
+	      				<li><a href="index.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
