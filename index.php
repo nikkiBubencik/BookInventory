@@ -90,7 +90,7 @@
   					<h2><?= $book1['title'] ?></h2>
 
   					<!-- Display price of toy -->
-  					<p>$<?= $book1['avg_rating'] ?></p>
+  					<p>$<?= $book1['authors'] ?></p>
   				</div>
 
    			</section>
