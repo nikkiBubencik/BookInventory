@@ -1,5 +1,3 @@
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 <?php   										// Opening PHP tag
 	
 	// Include the database connection script
@@ -29,7 +27,7 @@ error_reporting(E_ALL);
 	}
 
 	// Retrieve info about toy with ID '0001' from the db using provided PDO connection
-	$book1 = get_book($pdo, '2');
+	// $book1 = get_book($pdo, '2');
 	// $toy2 = get_toy($pdo, '0002');
 	// $toy3 = get_toy($pdo, '0003');
 	// $toy4 = get_toy($pdo, '0004');
@@ -83,7 +81,7 @@ error_reporting(E_ALL);
 		</header>
 
   		<main>
-  			<section class="book-catalog">
+<!--   			<section class="book-catalog">
 
   				<div class="book-card">
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
@@ -98,7 +96,7 @@ error_reporting(E_ALL);
 
   					<!-- Display price of toy -->
   					<p>$<?= $book1['authors'] ?></p>
-  				</div>
+  				</div> -->
 
 
   				<!-- 
@@ -176,7 +174,7 @@ error_reporting(E_ALL);
   					<p>$<?= $toy10['price'] ?></p>
   				</div> -->
 
-  			</section>
+<!--   			</section> -->
   		</main>
 
 	</body>
