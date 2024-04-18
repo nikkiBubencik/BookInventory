@@ -12,7 +12,7 @@
 	 */
 	function get_book(PDO $pdo, string $id) {
 
-		// SQL query to retrieve toy information based on the toy ID
+		// SQL query to retrieve book information based on the book ID
 		$sql = "SELECT * 
 			FROM books
 			WHERE bookID= :id;";	// :id is a placeholder for value provided later 
@@ -86,10 +86,12 @@
   				<div class="toy-card">
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
 
-  					<!-- Display name of toy -->
-  					<h2><?= $book1['title'] ?></h2>
+  					<!-- Displaytitle of book -->
+					<a href="toy.php">
+  						<h2><?= $book1['title'] ?></h2>
+					<a></a>
 
-  					<!-- Display price of toy -->
+  					<!-- Display authors -->
   					<p><?= $book1['authors'] ?></p>
   				</div>
 
