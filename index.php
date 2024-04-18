@@ -10,33 +10,33 @@
 	 * @param string $id     The ID of the toy to retrieve.
 	 * @return array|null    An associative array containing the toy information, or null if no toy is found.
 	 */
-	function get_toy(PDO $pdo, string $id) {
+	function get_book(PDO $pdo, string $id) {
 
 		// SQL query to retrieve toy information based on the toy ID
 		$sql = "SELECT * 
-			FROM toy
-			WHERE toynum= :id;";	// :id is a placeholder for value provided later 
+			FROM books
+			WHERE bookID= :id;";	// :id is a placeholder for value provided later 
 		                               // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
 
 
 		// Execute the SQL query using the pdo function and fetch the result
-		$toy = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+		$book = pdo($pdo, $sql, ['bookID' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
 		// Return the toy information (associative array)
-		return $toy;
+		return $book;
 	}
 
 	// Retrieve info about toy with ID '0001' from the db using provided PDO connection
-	$toy1 = get_toy($pdo, '0001');
-	$toy2 = get_toy($pdo, '0002');
-	$toy3 = get_toy($pdo, '0003');
-	$toy4 = get_toy($pdo, '0004');
-	$toy5 = get_toy($pdo, '0005');
-	$toy6 = get_toy($pdo, '0006');
-	$toy7 = get_toy($pdo, '0007');
-	$toy8 = get_toy($pdo, '0008');
-	$toy9 = get_toy($pdo, '0009');
-	$toy10 = get_toy($pdo, '0010');
+	$book1 = get_book($pdo, '2');
+	// $toy2 = get_toy($pdo, '0002');
+	// $toy3 = get_toy($pdo, '0003');
+	// $toy4 = get_toy($pdo, '0004');
+	// $toy5 = get_toy($pdo, '0005');
+	// $toy6 = get_toy($pdo, '0006');
+	// $toy7 = get_toy($pdo, '0007');
+	// $toy8 = get_toy($pdo, '0008');
+	// $toy9 = get_toy($pdo, '0009');
+	// $toy10 = get_toy($pdo, '0010');
 	/*
 	 * TO-DO: Retrieve info for ALL remaining toys from the db
 	 */
@@ -67,7 +67,7 @@
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Toy Catalog</a></li>
+	      				<li><a href="index.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
@@ -81,28 +81,28 @@
 		</header>
 
   		<main>
-  			<section class="toy-catalog">
+  			<section class="book-catalog">
 
-  				<div class="toy-card">
+  				<div class="book-card">
   					<!-- Create a hyperlink to toy.php page with toy number as parameter -->
-  					<a href="toy.php?toynum=<?= $toy1['toynum'] ?>">
+<!--   					<a href="toy.php?toynum=<?= $toy1['toynum'] ?>">
 
   						<!-- Display image of toy with its name as alt text -->
   						<img src="<?= $toy1['imgSrc'] ?>" alt="<?= $toy1['name'] ?>">
-  					</a>
+  					</a> -->
 
   					<!-- Display name of toy -->
-  					<h2><?= $toy1['name'] ?></h2>
+  					<h2><?= $book1['title'] ?></h2>
 
   					<!-- Display price of toy -->
-  					<p>$<?= $toy1['price'] ?></p>
+  					<p>$<?= $book1['authors'] ?></p>
   				</div>
 
 
   				<!-- 
 				  -- TO DO: Fill in the rest of the cards for ALL remaining toys from the db
   				  -->
-				<div class="toy-card">
+<!-- 				<div class="toy-card">
 					<a href="toy.php?toynum=<?= $toy2['toynum'] ?>">
 					<img src="<?= $toy2['imgSrc'] ?>" alt="<?= $toy2['name'] ?>">
 					</a>
@@ -172,7 +172,7 @@
   					</a>
   					<h2><?= $toy10['name'] ?></h2>
   					<p>$<?= $toy10['price'] ?></p>
-  				</div>
+  				</div> -->
 
   			</section>
   		</main>
