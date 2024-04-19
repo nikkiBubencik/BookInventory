@@ -7,7 +7,7 @@
   	$book_title = $_GET['title'];
 
 
-	function get_reviews(PDO $pdo, string $id, string $sortOrder){
+	function get_reviews(PDO $pdo, string $id){
 		$sql = " SELECT r.rating, r.review_text, u.first_name
 				FROM reviews as r JOIN users as u ON r.userID = u.userID
 				WHERE bookID= :id";
