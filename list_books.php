@@ -3,7 +3,7 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 	$listID = $_GET['listID'];
-	$listName = $_GET['listName'];
+	$list_Name = $_GET['listName'];
 	/*
 	 * Retrieve toy information from the database based on the toy ID.
 	 * 
@@ -70,7 +70,7 @@
 
   		<main>
   			<section class="book-catalog">
-				<h1>List Name: <?= $listName ?></h1>
+				<h1>List Name: <?= $list_Name ?></h1>
 				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
