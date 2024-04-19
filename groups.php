@@ -39,7 +39,7 @@
 	    	return $groups;
 	}
 	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allGroups = ($_SERVER["REQUEST_METHOD"] != "POST") ? $groups : get_all_users_groups($pdo, '1');
+	$allGroups = ($_SERVER["REQUEST_METHOD"] == "POST") ? $groups : get_all_users_groups($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
