@@ -98,7 +98,7 @@
 				    	<h2>Your Groups</h2>
 				    	<ul>
 				        <?php foreach ($allGroups as $group): ?>
-				            <li><a href="group_lists.php?listID=<?= $group['groupID'] ?>&group_name=<? $group['group_name'] ?>">
+				            <li><a href="groupLists.php?listID=<?= $group['groupID'] ?>&group_name=<? $group['group_name'] ?>">
 						        <?= $group['group_name'] ?></a></li>
 				        <?php endforeach; ?>
 				    	</ul>
