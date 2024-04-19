@@ -72,6 +72,7 @@
 
 		    <div class="header-right">
 		    	<ul>
+				<li><a href="groups.php">Groups</a></li>
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
