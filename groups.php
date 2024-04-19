@@ -3,7 +3,6 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-
 	function find_groups_by_name(PDO $pdo, string $groupName){
 		$sql = "SELECT *
 				FROM groups as g join user_groups as ug on g.groupID = ug.groupID
@@ -25,7 +24,7 @@
 		// Check if the list exists
 		if ($groups) {
 			// If the list exists, redirect to group.php with groupID parameter
-			header("Location: groups.php?groupID=" . $groups['groupID']);
+			header("Location: groups.php?groupName=" . $groups['groupName']);
 			exit(); 
 		}
 	}
