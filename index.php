@@ -65,7 +65,18 @@
 
   		<main>
   			<section class="book-catalog">
+				<div class="book-lookup-container">
+					<h1>Search Books</h1>
+					<form action="book-cat.php" method="POST">
+						<div class="form-books">
+							<label for="title">Book Title:</label>
+						        <input type="text" id="title" name="title" required>
+						</div>
 
+						<button type="submit">Lookup Book</button>
+					</form>
+				</div>
+				
   				<div class="book-card">
   					<!-- Create a hyperlink to book.php page with book ID as parameter -->
 
