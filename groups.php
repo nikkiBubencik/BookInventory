@@ -21,7 +21,7 @@
 		// Retrieve the value of the 'listName' field from the POST data
 		$groupName = $_POST['groupName'];
 
-		$groups= find_groups_by_name($pdo, $groupName);
+		$allGroups= find_groups_by_name($pdo, $groupName);
 
 		// Check if the list exists
 		// if (!empty($groups)) {
@@ -40,7 +40,7 @@
 	    	return $groups;
 	}
 	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allGroups = ($_SERVER["REQUEST_METHOD"] == "POST") ? $groups : get_all_users_groups($pdo, '1');
+	$allGroups = ($_SERVER["REQUEST_METHOD"] == "POST") ? $allGroups : get_all_users_groups($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
