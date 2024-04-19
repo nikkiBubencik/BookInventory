@@ -90,16 +90,15 @@
 			        <hr />
 					
 				<!-- Dropdown menu for sorting -->
-			        <form action="" method="GET">
-					<label for="sort">Sort by:</label>
-					<select name="sort" id="sort">
-						<option value="highest_rating" <?php if ($sortOrder == 'highest_rating') echo 'selected'; ?>>Highest Rating</option>
-<!-- 						<option value="lowest_rating" <?php if ($sortOrder == 'lowest_rating') echo 'selected'; ?>>Lowest Rating</option>
-						<option value="oldest" <?php if ($sortOrder == 'oldest') echo 'selected'; ?>>Oldest</option>
-						<option value="newest" <?php if ($sortOrder == 'newest') echo 'selected'; ?>>Newest</option> -->
-					</select>
-					<button type="submit">Sort</button>
-				</form>
+			        <div class="dropdown">
+					<button class="dropbtn">Sort by</button>
+					<div class="dropdown-content">
+					    	<a href="?sort=highest_rating" <?php if ($sortOrder == 'highest_rating') echo 'class="selected"'; ?>>Highest Rating</a>
+						<a href="?sort=lowest_rating" <?php if ($sortOrder == 'lowest_rating') echo 'class="selected"'; ?>>Lowest Rating</a>
+						<a href="?sort=oldest" <?php if ($sortOrder == 'oldest') echo 'class="selected"'; ?>>Oldest</a>
+						<a href="?sort=newest" <?php if ($sortOrder == 'newest') echo 'class="selected"'; ?>>Newest</a>
+				  	</div>
+				</div>
 				<br>	
 			        <h3>Reviews</h3>
 
