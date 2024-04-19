@@ -71,6 +71,7 @@
 
 		    <div class="header-right">
 		    	<ul>
+				<li><a href="groups.php">Groups</a></li>
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
@@ -83,7 +84,7 @@
 					<h1>List Lookup</h1>
 					<form action="list.php" method="POST">
 						<div class="form-group">
-							<label for="listName">List Name:</label>
+							<label for="listName">List Name: </label>
 						        <input type="text" id="listName" name="listName" required>
 						</div>
 
