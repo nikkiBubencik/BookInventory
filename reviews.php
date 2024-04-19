@@ -38,7 +38,7 @@
 	// Default sort order
 	$sortOrder = isset($_GET['sort']) ? $_GET['sort'] : 'highest_rating';
 
-	$all_reviews = get_reviews($pdo, $book_id, $sortOrder);
+	$all_reviews = get_reviews($pdo, $book_id, 'highest_rating');
 
 // Closing PHP tag  ?> 
 
