@@ -93,6 +93,34 @@
 
 			        <hr />
 
+					<div>
+    <?php
+    switch ($sortOrder) {
+        case 'highest_rating':
+            echo "Sorting by highest rating";
+            $sql .= "r.rating DESC";
+            break;
+        case 'lowest_rating':
+            echo "Sorting by lowest rating";
+            $sql .= "r.rating ASC";
+            break;
+        case 'oldest':
+            echo "Sorting by oldest";
+            $sql .= "u.date_added ASC";
+            break;
+        case 'newest':
+            echo "Sorting by newest";
+            $sql .= "u.date_added DESC";
+            break;
+        default:
+            // Default to sorting by highest rating
+            echo "Default sorting";
+            $sql .= "r.rating DESC";
+            break;
+    }
+    ?>
+</div>
+					
 				<!-- Dropdown menu for sorting -->
 			        <form action="" method="GET">
 					<label for="sort">Sort by:</label>
