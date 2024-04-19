@@ -24,7 +24,7 @@
 		$groups= find_groups_by_name($pdo, $groupName);
 
 		// Check if the list exists
-		if ($groups) {
+		if (!empty($groups)) {
 			// If the list exists, redirect to group.php with groupID parameter
 			header("Location: groups.php?groupName=" . urlencode($groupName));
 			exit(); 
