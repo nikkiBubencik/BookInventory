@@ -13,7 +13,14 @@
 		$group = pdo($pdo, $sql, ['groupName' => "%$groupName%"])->fetchAll();		
 		return $group;
 	}
+	function get_all_users_groups(PDO $pdo, $userId) {
+	    	$sql = "SELECT * FROM groups as g 
+	            JOIN user_groups as ug ON g.groupID = ug.groupID
+	            WHERE userID = :userId";
+		$groups = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
 
+	    	return $groups;
+	}
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -29,18 +36,11 @@
 		// 	header("Location: groups.php?groupName=" . urlencode($groupName));
 		// 	exit(); 
 		// }
+	} else {
+		$allGroups = get_all_users_groups($pdo, '1');
 	}
 
-	function get_all_users_groups(PDO $pdo, $userId) {
-	    	$sql = "SELECT * FROM groups as g 
-            JOIN user_groups as ug ON g.groupID = ug.groupID
-            WHERE userID = :userId";
-		$groups = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
-
-	    	return $groups;
-	}
-	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allGroups = ($_SERVER["REQUEST_METHOD"] == "POST") ? $allGroups : get_all_users_groups($pdo, '1');
+	
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
