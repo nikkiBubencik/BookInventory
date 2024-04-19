@@ -12,24 +12,24 @@
 				FROM reviews as r JOIN users as u ON r.userID = u.userID
 				WHERE bookID= :id 
     				ORDER BY ";
-		switch ($sortOrder) {
-			case 'highest_rating':
-				$sql .= "r.rating DESC";
-				break;
-			// case 'lowest_rating':
-			// 	$sql .= "r.rating ASC";
-			// 	break;
-			// case 'oldest':
-			// 	$sql .= "u.date_added ASC";
-			// 	break;
-			// case 'newest':
-			// 	$sql .= "u.date_added DESC";
-			// 	break;
-			default:
-				// Default to sorting by highest rating
-				$sql .= "r.rating DESC";
-				break;
-		}
+		// switch ($sortOrder) {
+		// 	case 'highest_rating':
+		// 		$sql .= "r.rating DESC";
+		// 		break;
+		// 	// case 'lowest_rating':
+		// 	// 	$sql .= "r.rating ASC";
+		// 	// 	break;
+		// 	// case 'oldest':
+		// 	// 	$sql .= "u.date_added ASC";
+		// 	// 	break;
+		// 	// case 'newest':
+		// 	// 	$sql .= "u.date_added DESC";
+		// 	// 	break;
+		// 	default:
+		// 		// Default to sorting by highest rating
+		// 		$sql .= "r.rating DESC";
+		// 		break;
+		// }
 		$review = pdo($pdo, $sql, ['id' => $id])->fetchAll();	
 
 		return $review;
@@ -90,7 +90,7 @@
 			        <hr />
 					
 				<!-- Dropdown menu for sorting -->
-			        <div class="dropdown">
+<!-- 			        <div class="dropdown">
 					<button class="dropbtn">Sort by</button>
 					<div class="dropdown-content">
 					    	<a href="?sort=highest_rating" <?php if ($sortOrder == 'highest_rating') echo 'class="selected"'; ?>>Highest Rating</a>
@@ -98,7 +98,7 @@
 						<a href="?sort=oldest" <?php if ($sortOrder == 'oldest') echo 'class="selected"'; ?>>Oldest</a>
 						<a href="?sort=newest" <?php if ($sortOrder == 'newest') echo 'class="selected"'; ?>>Newest</a>
 				  	</div>
-				</div>
+				</div> -->
 				<br>	
 			        <h3>Reviews</h3>
 
