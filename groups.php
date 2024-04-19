@@ -34,7 +34,7 @@
 	    	$sql = "SELECT * FROM groups as g 
             JOIN user_groups as ug ON g.groupID = ug.groupID
             WHERE userID = :userId";
-		$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
+		$groups = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
 
 	    	return $groups;
 	}
