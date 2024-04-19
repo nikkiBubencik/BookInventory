@@ -70,7 +70,7 @@
 
   		<main>
   			<section class="book-catalog">
-				<h1>List Name: <?php echo $listName; ?></h1>
+				<h1>List Name: <?= $listName ?></h1>
 				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
