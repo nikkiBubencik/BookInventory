@@ -52,6 +52,7 @@
 
 		    <div class="header-right">
 		    	<ul>
+				<li><a href="groups.php">Groups</a></li>
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
@@ -63,7 +64,7 @@
 				
 				<div class="book-details">
 
-					<!-- Display title of book -->
+				<!-- Display title of book -->
 			        <h1><?= $info['title'] ?></h1>
 
 			        <hr />
@@ -74,17 +75,17 @@
 			        <p><strong>Authors:</strong> <?= $info['authors'] ?></p>
 
 			        <!-- Display average rating -->
-			        <p><strong>Average Rating(Good Reads):</strong>  <?= $info['ave_rating'] ?></p>
+			        <p><strong>Average Rating(Good Reads): </strong>  <?= $info['ave_rating'] ?></p>
 
 			        <!-- Display ISBN -->
-			        <p><strong>ISBN:</strong> <?= $info['ISBN'] ?></p>
+			        <p><strong>ISBN: </strong> <?= $info['ISBN'] ?></p>
 
 			        <!-- Display page count -->
-			        <p><strong>Number of Pages:</strong> <?= $info['page_count'] ?></p>
+			        <p><strong>Number of Pages: </strong> <?= $info['page_count'] ?></p>
 
-				<p><strong>Publisher:</strong> <?= $info['publisher'] ?></p>			        
+				<p><strong>Publisher: </strong> <?= $info['publisher'] ?></p>			        
 				
-				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p>
+				<p><strong>Year Published: </strong> <?= $info['year_published'] ?></p>
 
 				<a href="reviews.php?bookID=<?= $info['bookID'] ?>&title=<?= $info['title'] ?>">Customer Reviews</a>
 
