@@ -84,7 +84,7 @@
 			<div class="group-lookup-container">
 				<div class="group-lookup-container">
 					<h1>Group Lookup</h1>
-					<form action="group.php" method="POST">
+					<form action="groups.php" method="POST">
 						<div class="form-group">
 							<label for="groupName">Group Name:</label>
 						        <input type="text" id="groupName" name="groupName" required>
