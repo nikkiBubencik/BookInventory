@@ -86,6 +86,7 @@
 				
 				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p>
 
+				<a herf = "reviews.php?bookID=<? =$info['bookID'] ?>"; >Customer Reviews</a>
 			    </div>
 			</div>
 		</main>
