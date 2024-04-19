@@ -73,7 +73,7 @@
 
 		    <div class="header-right">
 		    	<ul>
-            <li><a href="groups.php">Groups</a></li>  
+            			<li><a href="groups.php">Groups</a></li>  
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
@@ -98,7 +98,7 @@
 				    	<h2>Your Groups</h2>
 				    	<ul>
 				        <?php foreach ($allGroups as $group): ?>
-				            <li><a href="groupLists.php?listID=<?= $group['groupID'] ?>&group_name=<? $group['group_name'] ?>">
+						<li><a href="groupLists.php?listID=<?= $group['groupID'] ?>&group_name=<?= $group['group_name'] ?>">
 						        <?= $group['group_name'] ?></a></li>
 				        <?php endforeach; ?>
 				    	</ul>
