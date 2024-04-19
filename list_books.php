@@ -3,7 +3,7 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 	$listID = $_GET['listID'];
-	#listName = $_GET['listName'];
+	$listName = $_GET['listName'];
 	/*
 	 * Retrieve toy information from the database based on the toy ID.
 	 * 
@@ -62,6 +62,7 @@
 
 		    <div class="header-right">
 		    	<ul>
+				<li><a href="groups.php">Groups</a></li>
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
