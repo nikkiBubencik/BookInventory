@@ -4,7 +4,7 @@
 	require 'includes/database-connection.php';
 
 	$book_id = $_GET['bookID'];
-  $book_title = $_GET['title'];
+  	$book_title = $_GET['title'];
 
 
 	function get_reviews(PDO $pdo, string $id, string $sortOrder){
@@ -15,15 +15,19 @@
 		switch ($sortOrder) {
 			case 'highest_rating':
 				$sql .= "r.rating DESC";
+				echo "Sorting by highest rating";
 				break;
 			case 'lowest_rating':
 				$sql .= "r.rating ASC";
+				echo "Sorting by lowest rating";
 				break;
 			case 'oldest':
 				$sql .= "u.date_added ASC";
+				echo "Sorting by olders date";
 				break;
 			case 'newest':
 				$sql .= "u.date_added DESC";
+				echo "Sorting by newest date";
 				break;
 			default:
 				// Default to sorting by highest rating
