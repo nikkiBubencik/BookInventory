@@ -25,7 +25,7 @@
 		// Check if the list exists
 		if ($groups) {
 			// If the list exists, redirect to group.php with groupID parameter
-			header("Location: group.php?listID=" . $groups['groupID']);
+			header("Location: groups.php?listID=" . $groups['groupID']);
 			exit(); 
 		}
 	}
