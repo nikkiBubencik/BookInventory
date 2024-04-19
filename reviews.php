@@ -11,11 +11,31 @@
 		$sql = " SELECT r.rating, r.review_text, u.first_name
 				FROM reviews as r JOIN users as u ON r.userID = u.userID
 				WHERE bookID= :id;";
-
+		switch ($sortOrder) {
+			case 'highest_rating':
+				$sql .= "r.rating DESC";
+				break;
+			case 'lowest_rating':
+				$sql .= "r.rating ASC";
+				break;
+			case 'oldest':
+				$sql .= "u.date_added ASC";
+				break;
+			case 'newest':
+				$sql .= "u.date_added DESC";
+				break;
+			default:
+				// Default to sorting by highest rating
+				$sql .= "r.rating DESC";
+				break;
+		}
 		$review = pdo($pdo, $sql, ['id' => $id])->fetchAll();	
 
 		return $review;
 	}
+
+	// Default sort order
+	$sortOrder = isset($_GET['sort']) ? $_GET['sort'] : 'highest_rating';
 
 	$all_reviews = get_reviews($pdo, $book_id);
 
@@ -68,6 +88,18 @@
 
 			        <hr />
 
+				<!-- Dropdown menu for sorting -->
+			        <form action="" method="GET">
+					<label for="sort">Sort by:</label>
+					<select name="sort" id="sort">
+						<option value="highest_rating" <?php if ($sortOrder == 'highest_rating') echo 'selected'; ?>>Highest Rating</option>
+						<option value="lowest_rating" <?php if ($sortOrder == 'lowest_rating') echo 'selected'; ?>>Lowest Rating</option>
+						<option value="oldest" <?php if ($sortOrder == 'oldest') echo 'selected'; ?>>Oldest</option>
+						<option value="newest" <?php if ($sortOrder == 'newest') echo 'selected'; ?>>Newest</option>
+					</select>
+					<button type="submit">Sort</button>
+				</form>
+				<br>	
 			        <h3>Reviews</h3>
 
 			        <!-- Display all reviews -->
@@ -78,6 +110,7 @@
 			            		<strong>Review:</strong> <?= $review['review_text'] ?><br>
 			            		<strong>User:</strong> <?= $review['first_name'] ?>
 			            	</li>
+					<hr>
 			            <?php endforeach; ?>
 			        </ul>
 			        
