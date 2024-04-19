@@ -86,7 +86,8 @@
 				
 				<p><strong>Year Published:</strong> <?= $info['year_published'] ?></p>
 
-				<a href = "reviews.php?bookID=<? =$info['bookID'] ?>">Customer Reviews</a>
+				<a href="reviews.php?bookID=<?= $info['bookID'] ?>">Customer Reviews</a>
+
 			    </div>
 			</div>
 		</main>
