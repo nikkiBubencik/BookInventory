@@ -10,8 +10,7 @@
 	function get_reviews(PDO $pdo, string $id, string $sortOrder){
 		$sql = " SELECT r.rating, r.review_text, u.first_name
 				FROM reviews as r JOIN users as u ON r.userID = u.userID
-				WHERE bookID= :id 
-    				ORDER BY ";
+				WHERE bookID= :id";
 		// switch ($sortOrder) {
 		// 	case 'highest_rating':
 		// 		$sql .= "r.rating DESC";
@@ -36,9 +35,9 @@
 	}
 
 	// Default sort order
-	$sortOrder = isset($_GET['sort']) ? $_GET['sort'] : 'highest_rating';
+	// $sortOrder = isset($_GET['sort']) ? $_GET['sort'] : 'highest_rating';
 
-	$all_reviews = get_reviews($pdo, $book_id, 'highest_rating');
+	$all_reviews = get_reviews($pdo, $book_id);
 
 // Closing PHP tag  ?> 
 
