@@ -3,6 +3,8 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
+	$groupName = $_GET['groupName'] ?? '';
+
 	function find_groups_by_name(PDO $pdo, string $groupName){
 		$sql = "SELECT *
 				FROM groups as g join user_groups as ug on g.groupID = ug.groupID
