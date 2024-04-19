@@ -101,7 +101,7 @@
 				    	<h2><?= $groupName ?>'s Lists</h2>
 				    	<ul>
 				        <?php foreach ($allLists as $list): ?>
-				            <li><a href="list_books.php?listID=<?= $list['listID'] ?>&title=<?= $list['list_name'] ?>">
+				            <li><a href="list_books.php?listID=<?= $list['listID'] ?>&listName=<?= $list['list_name'] ?>">
 						<?= $list['list_name'] ?></a></li>
 				        <?php endforeach; ?>
 				    	</ul>
