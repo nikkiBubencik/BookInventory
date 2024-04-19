@@ -4,7 +4,7 @@
 	require 'includes/database-connection.php';
 
   $groupID = $_GET['groupID'];
-  $groupName = $_GET['groupName'];
+  $groupName = $_GET['group_name'];
 
 	function find_lists_by_name(PDO $pdo, string $listName){
 		$sql = "SELECT *
