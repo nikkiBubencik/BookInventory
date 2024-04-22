@@ -4,36 +4,45 @@
 	require 'includes/database-connection.php';
 
 
-	function search_books(PDO $pdo, string $title) {
-
-		// SQL query to retrieve book information based on the book ID
-		$sql = "SELECT * 
-			FROM books
-			WHERE title= :title;";	// :id is a placeholder for value provided later 
-		                               // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
-
-
-		// Execute the SQL query using the pdo function and fetch the result
-		$book = pdo($pdo, $sql, ['title' => "%$title%"])->fetchAll();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
-
-		// Return the book information 
-		return $book;
+	function search_books_by_name(PDO $pdo, string $bookName){
+		$sql = "SELECT *
+				FROM books
+    				WHERE bookName LIKE :bookName
+				LIMIT 25;";
+		
+		$books = pdo($pdo, $sql, ['bookName' => "%$bookName%"])->fetchAll();		
+		return $books;
 	}
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	
+	// Check if the request method is POST (i.e, form submitted)
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		// Retrieve the value of the 'listName' field from the POST data
-		$title = $_POST['title'];
+		// Retrieve the value of the 'bookName' field from the POST data
+		$bookName = $_POST['bookName'];
+	}
+	else{
+		$bookName = '';
+	}
+	// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
+	$allBooks = search_books_by_name($pdo, $bookName);
+	
+	// // Check if the book exists
+	// if ($list) {
+	// 	// If the list exists, redirect to list.php with listID parameter
+	// 	header("Location: list.php?listID=" . $list['listID']);
+	// 	exit(); 
+	// }
+	
 
-		$allBooks= search_books($pdo, $title);
+	// function get_all_user_lists(PDO $pdo, $userId) {
+	//     	$sql = "SELECT * FROM reading_list WHERE userID = :userId";
+	// 	$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
 
-
-	} else {
-        // If the form is not submitted, fetch all books
-        $allBooks = search_books($pdo, ''); 
-    }
-
-
+	//     	return $lists;
+	// }
+	// CHNAGE '1' to $userId so its for the user who is logged in
+	// $allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
@@ -59,7 +68,7 @@
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Book Catalog</a></li>
+	      				<li><a href="book-cat.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
@@ -73,31 +82,37 @@
 		    </div>
 		</header>
 
-  		<main>
-  			<section class="book-catalog">
+		<main>
 
-  				    <?php
-                    // Check if there are any search results
-                    if (!empty($allBooks)) {
-                        // Iterate over each book in the search results
-                        foreach ($allBooks as $book) {
-                            <div class="book-card">
-                              <a href="book.php?bookID=<?= $book['bookID'] ?>">
-                              <h2><?= $book['title'] ?></h2>
-                              <p><?= $book['authors'] ?></p>
-                              </a>
-                            </div>;
-                        }
-                    } else {
-                        <p>No matching books found.</p>
-                    }
-                ?>
+			<div class="list-lookup-container">
+				<div class="list-lookup-container">
+					<h1>List Lookup</h1>
+					<form action="list.php" method="POST">
+						<div class="form-group">
+							<label for="bookName">Book Name: </label>
+						        <input type="text" id="bookName" name="bookName" required>
+						</div>
 
-   			</section>
-  		</main>
+						<button type="submit">Lookup Book</button>
+					</form>
+				</div>
+				
+				<div class="Books-names">
+				        <?php foreach ($allBooks as $book): ?>
+						<li><a href="book-cat.php?bookName=<?= $book['title'] ?>">
+						<?= $book['title'] ?></a></li>
+						<?= $book['authors'] ?>
+					<hr>
+				        <?php endforeach; ?>
+				    	</ul>
+				</div>
+				
+				
+
+			</div>
+
+		</main>
 
 	</body>
+
 </html>
-
-
-
