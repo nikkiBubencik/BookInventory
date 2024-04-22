@@ -8,7 +8,7 @@
 	$listName = '';
 	$created = False;
 
-	function add_book_to_list(PDO $pdo, string $bookId, string $listName, string $listNotFound){
+	function add_book_to_list(PDO $pdo, string $bookId, string $listName, $listNotFound){
 	    // start transaction
 	    $pdo->beginTransaction();
 	    
@@ -17,7 +17,7 @@
 	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
 	
 	    if (!$listIdResult) {
-	        $listNotFound = True
+	        $listNotFound = True;
 	        $pdo->rollBack();
 	        return;
 	    }
