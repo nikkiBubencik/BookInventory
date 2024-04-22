@@ -100,7 +100,7 @@
 				<div class="Books-names">
 					<ul style="list-style-type: none; padding: 0;">
 				        <?php foreach ($allBooks as $book): ?>
-						<li><a href"book.php?bookID=<?= $book['bookID'] ?>">
+						<li><a href="book.php?bookID=<?= $book['bookID'] ?>">
 						<?= $book['title'] ?></a></li>
 						<?= $book['authors'] ?>
 					<hr>
