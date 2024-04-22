@@ -8,7 +8,7 @@
 		$sql = "SELECT *
 				FROM books
     				WHERE title LIKE :bookName
-				OR authors LIKE :bookName
+				OR authors LIKE '%$bookName%'
 				LIMIT 25;";
 		
 		$books = pdo($pdo, $sql, ['bookName' => "%$bookName%"])->fetchAll();		
