@@ -4,12 +4,13 @@
 	require 'includes/database-connection.php';
 
 
-	function find_lists_by_name(PDO $pdo, string $listName){
+	function find_lists_by_name(PDO $pdo, string $listName, string $userId){
 		$sql = "SELECT *
 				FROM reading_list
-				WHERE list_name LIKE :listName;";
+				WHERE list_name LIKE :listName 
+    				AND userID = :userId;";
 		
-		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetchAll();		
+		$list = pdo($pdo, $sql, ['listName' => "%$listName%", 'userId' => $userId])->fetchAll();		
 		return $list;
 	}
 
@@ -20,7 +21,8 @@
 		// Retrieve the value of the 'listName' field from the POST data
 		$listName = $_POST['listName'];
 
-		$lists = find_lists_by_name($pdo, $listName);
+		// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
+		$lists = find_lists_by_name($pdo, $listName, '1');
 
 		// Check if the list exists
 		if ($list) {
