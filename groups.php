@@ -4,12 +4,12 @@
 	require 'includes/database-connection.php';
 
 
-	function search_groups_by_name(PDO $pdo, string $groupName){
+	function search_groups_by_name(PDO $pdo, string $groupName, string $userId){
 		$sql = "SELECT *
 			FROM groups as g join user_groups as ug on g.groupID = ug.groupID
-			WHERE group_name LIKE :groupName;";
+			WHERE group_name LIKE :groupName and userID = :userId;";
 		
-		$group = pdo($pdo, $sql, ['groupName' => "%$groupName%"])->fetchAll();		
+		$group = pdo($pdo, $sql, ['groupName' => "%$groupName%", 'userId' => $userId])->fetchAll();		
 		return $group;
 	}
 
@@ -24,7 +24,7 @@
 		$groupName = '';
 	}
 	// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
-	$allGroups = search_groups_by_name($pdo, $groupName);
+	$allGroups = search_groups_by_name($pdo, $groupName, '1');
 	
 // Closing PHP tag  ?> 
 
