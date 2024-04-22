@@ -8,7 +8,7 @@
 		// start transaction
     $pdo->beginTransaction();
     // create new group
-    $sql = "INSERT INFO groups (group_name) VALUES (:groupName);";
+    $sql = "INSERT INTO groups (group_name) VALUES (:groupName);";
 		$stmt = pdo($pdo, $sql, ['groupName' => $groupName])->prepare();		
 
     // get new groupID
