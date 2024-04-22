@@ -9,7 +9,7 @@
     $pdo->beginTransaction();
     // create new group
     $sql = "INSERT INTO groups (group_name) VALUES (:groupName);";
-		$stmt = pdo($pdo, $sql, ['groupName' => $groupName])->prepare();		
+    $stmt = pdo($pdo, $sql, ['groupName' => $groupName]);		
 
     // get new groupID
     $newGroupId = $pdo->lastInsertId();
