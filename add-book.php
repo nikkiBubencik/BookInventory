@@ -6,6 +6,7 @@
   	$bookId = $_GET['bookId'];
   	$bookName = $_GET['bookName'];
 	$listName = '';
+	$created = False;
 
 	function add_book_to_list(PDO $pdo, string $bookId, string $listName){
 	    // start transaction
@@ -37,9 +38,10 @@
 		
 		// Retrieve the value of the 'bookName' field from the POST data
 		$listName = $_POST['listName'];
+		$allGroups = add_book_to_list($pdo, $bookId, $listName);
+		$created = True;
 	}
 
-	$allGroups = add_book_to_list($pdo, $bookId, $listName);
 
 	
 // Closing PHP tag  ?> 
@@ -96,8 +98,9 @@
 
 					</form>
 				</div>
-            				<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
-				
+            				<?php if($created): ?>
+		            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
+		        		<?php endif; ?>	
 
 			</div>
 
