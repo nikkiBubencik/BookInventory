@@ -44,7 +44,7 @@
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Book Catalog</a></li>
+	      				<li><a href="book-cat.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
