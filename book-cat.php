@@ -87,7 +87,7 @@
 			<div class="book-lookup-container">
 				<div class="book-lookup-container">
 					<h1>Book Lookup</h1>
-					<form action="list.php" method="POST">
+					<form action="book-cat.php" method="POST">
 						<div class="form-group">
 							<label for="bookName">Book Name: </label>
 						        <input type="text" id="bookName" name="bookName" required>
