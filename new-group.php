@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			<div class="group-lookup-container">
 				<div class="group-lookup-container">
-					<h1>Group Lookup</h1>
+					<h1>Create Group</h1>
 					<form action="new-group.php" method="POST">
               <div class="form-group">
                   <label for="newGroupName">New Group Name:</label>
