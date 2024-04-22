@@ -3,16 +3,17 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-  $groupID = $_GET['groupID'];
-  $groupName = $_GET['group_name'];
+	$groupId = $_GET['groupId'] ?? '';
+	$groupName = $_GET['groupName'] ?? '';
 
-	function find_lists_by_name(PDO $pdo, string $listName){
+	function search_group_list_by_name(PDO $pdo, string $listName, string $groupId){
 		$sql = "SELECT *
-				FROM reading_list  as r
-        JOIN group_lists as g on r.listID = g.listID
-				WHERE list_name LIKE :listName;";
+			FROM reading_list  as r
+        		JOIN group_lists as g on r.listID = g.listID
+			WHERE list_name LIKE :listName 
+   			AND groupID = :groupId;";
 		
-		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetchAll();		
+		$list = pdo($pdo, $sql, ['listName' => "%$listName%", 'groupId' => $groupId])->fetchAll();		
 		return $list;
 	}
 
@@ -20,29 +21,15 @@
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		// Retrieve the value of the 'listName' field from the POST data
+		// Retrieve the value of the 'bookName' field from the POST data
 		$listName = $_POST['listName'];
-
-		$lists = find_lists_by_name($pdo, $listName);
-
-		// Check if the list exists
-		if ($lists) {
-			// If the list exists, redirect to list.php with listID parameter
-			header("Location: groupLists.php?listID=" . $list['listID']);
-			exit(); 
-		}
+	}
+	else{
+		$listName = '';
 	}
 
-	function get_all_user_lists(PDO $pdo, $userId) {
-	    	$sql = "SELECT * FROM reading_list as r 
-        JOIN group_lists as g ON r.listID = g.listID
-        WHERE userID = :userId";
-		$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
-
-	    	return $lists;
-	}
-	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
+	$allList = search_group_list_by_name($pdo, $listName, $groupId);
+	
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
@@ -76,7 +63,7 @@
 
 		    <div class="header-right">
 		    	<ul>
-            			<li><a href="groups.php">Groups</a></li>
+				<li><a href="groups.php">Groups</a></li>
 		    		<li><a href="list.php">Lists</a></li>
 		    	</ul>
 		    </div>
@@ -84,25 +71,28 @@
 
 		<main>
 
-			<div class="list-lookup-container">
-				<div class="list-lookup-container">
+			<div class="group-list-lookup-container">
+				<div class="group-list-lookup-container">
 					<h1>Group List Lookup</h1>
 					<form action="groupLists.php" method="POST">
 						<div class="form-group">
-							<label for="listName">Group List Name:</label>
+							<label for="groupName">Group List Name: </label>
 						        <input type="text" id="listName" name="listName" required>
 						</div>
 
-						<button type="submit">Lookup Group List</button>
+						<button type="submit">Lookup Group's List</button>
 					</form>
 				</div>
 				
-				<div class="list-names">
-				    	<h2><?= $groupName ?>'s Lists</h2>
-				    	<ul>
-				        <?php foreach ($allLists as $list): ?>
-				            <li><a href="list_books.php?listID=<?= $list['listID'] ?>&listName=<?= $list['list_name'] ?>">
-						<?= $list['list_name'] ?></a></li>
+				<div class="Group-list-names">
+					<h2><?= $groupName ?> List</h2>
+					<ul style="list-style-type: none; padding: 0;">
+				        <?php foreach ($allList as $list): ?>
+						<li><a href="list_books.php?listID=<?= $list['listID'] ?>&list_Name=<?= $list['list_name'] ?>">
+						<?= $list['list_name'] ?></a>
+						</li>
+			
+					<hr>
 				        <?php endforeach; ?>
 				    	</ul>
 				</div>
