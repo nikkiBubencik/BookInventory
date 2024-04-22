@@ -91,6 +91,8 @@
 						</div>
 
 						<button type="submit">Lookup List</button>
+						<button onclick="location.href='new-list.php'; return false;" type="button">Add New List</button>
+
 					</form>
 				</div>
 				
