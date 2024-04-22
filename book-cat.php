@@ -7,7 +7,7 @@
 	function search_books_by_name(PDO $pdo, string $bookName){
 		$sql = "SELECT *
 				FROM books
-    				WHERE bookName LIKE :bookName
+    				WHERE title LIKE :bookName
 				LIMIT 25;";
 		
 		$books = pdo($pdo, $sql, ['bookName' => "%$bookName%"])->fetchAll();		
