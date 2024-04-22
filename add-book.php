@@ -8,7 +8,7 @@
 	$listName = '';
 	$created = False;
 
-	function add_book_to_list(PDO $pdo, string $bookId, string $listName){
+	function add_book_to_list(PDO $pdo, string $bookId, string $listName, string $listNotFound){
 	    // start transaction
 	    $pdo->beginTransaction();
 	    
@@ -17,7 +17,7 @@
 	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
 	
 	    if (!$listIdResult) {
-	        echo "List not found!";
+	        $listNotFound = True
 	        $pdo->rollBack();
 	        return;
 	    }
@@ -29,17 +29,21 @@
 	
 	    // Commit transaction
 	    $pdo->commit();
+	    return $listNotFound;
 	}
 
-
+	$listNotFound = True;
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		// Retrieve the value of the 'bookName' field from the POST data
 		$listName = $_POST['listName'];
-		$allGroups = add_book_to_list($pdo, $bookId, $listName);
+		$allBooks = add_book_to_list($pdo, $bookId, $listName, $listNotFound);
 		$created = True;
+		if(!$allBooks){
+			$listNotFound = False;
+		}
 	}
 
 
@@ -85,10 +89,10 @@
 
 		<main>
 
-			<div class="group-lookup-container">
-				<div class="group-lookup-container">
-					<h1>Group Lookup</h1>
-					<form action="groups.php" method="POST">
+			<div class="add-book-list-container">
+				<div class="add-book-list-container">
+					<h1>Add Book to List</h1>
+					<form action="add-book.php?bookId=<?= $bookId ?>&bookName=<?= $bookName ?>" method="POST">
 						<div class="form-group">
 							<label for="listName">List Name: </label>
 						        <input type="text" id="listName" name="listName" required>
@@ -101,6 +105,9 @@
             				<?php if($created): ?>
 		            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
 		        		<?php endif; ?>	
+					<?php if($listNotFound): ?>
+						<P> <?= $listName ?> not found</P>
+					<?php endif; ?>
 
 			</div>
 
