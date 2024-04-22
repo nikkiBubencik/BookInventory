@@ -61,7 +61,7 @@
 		<main>
 		
 			<div class="book-details-container">
-				<button onclick="location.href='add-book.php?bookID=<?= $info['bookID'] ?>&bookNum=<?= $info['bookNum'] ?>'; return false;" type="button">Add to List</button>
+				<button onclick="location.href='add-book.php?bookId=<?= $info['bookID'] ?>&bookName=<?= $info['title'] ?>'; return false;" type="button">Add to List</button>
 
 				<div class="book-details">
 
