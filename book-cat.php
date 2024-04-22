@@ -84,9 +84,9 @@
 
 		<main>
 
-			<div class="list-lookup-container">
-				<div class="list-lookup-container">
-					<h1>List Lookup</h1>
+			<div class="book-lookup-container">
+				<div class="book-lookup-container">
+					<h1>Book Lookup</h1>
 					<form action="list.php" method="POST">
 						<div class="form-group">
 							<label for="bookName">Book Name: </label>
@@ -98,8 +98,9 @@
 				</div>
 				
 				<div class="Books-names">
+					<ul style="list-style-type: none; padding: 0;">
 				        <?php foreach ($allBooks as $book): ?>
-						<li><a href="book-cat.php?bookName=<?= $book['title'] ?>">
+						<li><a href="book.php?bookName=<?= $book['bookID'] ?>">
 						<?= $book['title'] ?></a></li>
 						<?= $book['authors'] ?>
 					<hr>
