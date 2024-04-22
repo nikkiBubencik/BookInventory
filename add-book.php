@@ -15,7 +15,7 @@
 	    // Query to get listID from listName
 	    $listIdQuery = "SELECT listID FROM reading_list WHERE list_name = :listName;";
 	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
-	
+		
 	    if (!$listIdResult) {
 	        $listNotFound = True;
 	        $pdo->rollBack();
@@ -24,7 +24,7 @@
 	
 	    // insert book into list
 	    $listId = $listIdResult['listID'];
-			$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, DATE())";
+			$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, CURDATE())";
 			$stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
 	
 	    // Commit transaction
@@ -32,7 +32,7 @@
 	    return $listNotFound;
 	}
 
-	$listNotFound = True;
+	$listNotFound = False;
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
