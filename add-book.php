@@ -17,6 +17,7 @@
 		
 	    if (!$listIdResult) {
 	        $listNotFound = True;
+		echo $listNotFound;
 	        $pdo->rollBack();
 	        return;
 	    }
