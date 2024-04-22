@@ -17,9 +17,8 @@
 		
 	    if (!$listIdResult) {
 	        $listNotFound = True;
-		echo $listNotFound;
 	        $pdo->rollBack();
-	        return;
+	        return $listNotFound;
 	    }
 	
 	    // insert book into list
