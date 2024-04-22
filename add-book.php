@@ -5,28 +5,29 @@
 
   	$bookId = $_GET['bookId'];
   	$bookName = $_GET['bookName'];
+	$listName = '';
 
 	function add_book_to_list(PDO $pdo, string $bookId, string $listName){
-    // start transaction
-    $pdo->beginTransaction();
-    
-    // Query to get listID from listName
-    $listIdQuery = "SELECT listID FROM reading_lists WHERE list_name = :listName"
-    $listResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
-
-    if (!$listIdResult) {
-        echo "List not found!";
-        $pdo->rollBack();
-        return;
-    }
-
-    // insert book into list
-    $listId = $listIdResult['listID'];
-		$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, DATE())";
-		$stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
-
-    // Commit transaction
-    $pdo->commit();
+	    // start transaction
+	    $pdo->beginTransaction();
+	    
+	    // Query to get listID from listName
+	    $listIdQuery = "SELECT listID FROM reading_lists WHERE list_name = :listName;";
+	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
+	
+	    if (!$listIdResult) {
+	        echo "List not found!";
+	        $pdo->rollBack();
+	        return;
+	    }
+	
+	    // insert book into list
+	    $listId = $listIdResult['listID'];
+			$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, DATE())";
+			$stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
+	
+	    // Commit transaction
+	    $pdo->commit();
 	}
 
 
@@ -38,8 +39,8 @@
 		$listName = $_POST['listName'];
 	}
 
-	// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
 	$allGroups = add_book_to_list($pdo, $bookId, $listName);
+
 	
 // Closing PHP tag  ?> 
 
@@ -95,9 +96,7 @@
 
 					</form>
 				</div>
-			<?php if($created): ?>
-            <p>Book "<?php echo $bookName; ?>" has been added to "<?php echo $listName; ?>" List </p>
-        <?php endif; ?>		
+            				<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
 				
 
 			</div>
