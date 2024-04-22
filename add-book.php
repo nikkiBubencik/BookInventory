@@ -3,8 +3,8 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-  $bookId = $_GET['bookId'];
-  #bookName = $_GET['bookName'];
+  	$bookId = $_GET['bookId'];
+  	$bookName = $_GET['bookName'];
 
 	function add_book_to_list(PDO $pdo, string $bookId, string $listName){
     // start transaction
