@@ -77,6 +77,8 @@
 						</div>
 
 						<button type="submit">Lookup Group</button>
+						<button onclick="location.href='new-group.php'; return false;" type="button">Add New Group</button>
+
 					</form>
 				</div>
 				
