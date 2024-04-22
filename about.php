@@ -21,7 +21,7 @@
 
 	      		<nav>
 	      			<ul>
-	      				<li><a href="index.php">Book Catalog</a></li>
+	      				<li><a href="book-cat.php">Book Catalog</a></li>
 	      				<li><a href="about.php">About</a></li>
 			        </ul>
 			    </nav>
@@ -42,7 +42,7 @@
 				<hr />
 
 				<p>Welcome to Book Inventory, where the fun never ends and the imagination runs wild! At Book Inventory, we believe in the power of reading to inspire creativity, ignite curiosity, and bring joy to people of all ages.</p>
-				<p>Our Book Inventory is a magical wonderland filled with a diverse selection of books. You can design various reading Lists for yourself or for a group, great for Book CLubs.</p>
+				<p>Our Book Inventory is a magical wonderland filled with a diverse selection of books. You can design various reading Lists for yourself or for a group, great for Book Clubs.</p>
 				<p>So come on in, explore our selection, and let your inner child run free at Book Inventory!</p>
 			</div>
 		</main>
