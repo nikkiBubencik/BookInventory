@@ -98,13 +98,13 @@
 
 					</form>
 				</div>
-            	
-					<?php if($listNotFound): ?>
-						<P> <?= $listName ?> not found</P>
-					<?php else: ?>
-		            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
+            				<?php if(isset($_POST['listName'])): ?>
+						<?php if($listNotFound): ?>
+							<P> <?= $listName ?> not found</P>
+						<?php else: ?>
+			            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
+						<?php endif; ?>
 					<?php endif; ?>
-
 			</div>
 
 		</main>
