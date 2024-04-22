@@ -61,7 +61,8 @@
 		<main>
 		
 			<div class="book-details-container">
-				
+				<button onclick="location.href='add-book.php'; return false;" type="button">Add to List</button>
+
 				<div class="book-details">
 
 				<!-- Display title of book -->
