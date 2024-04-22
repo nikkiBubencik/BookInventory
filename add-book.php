@@ -12,7 +12,7 @@
 	    $pdo->beginTransaction();
 	    
 	    // Query to get listID from listName
-	    $listIdQuery = "SELECT listID FROM reading_lists WHERE list_name = :listName;";
+	    $listIdQuery = "SELECT listID FROM reading_list WHERE list_name = :listName;";
 	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
 	
 	    if (!$listIdResult) {
