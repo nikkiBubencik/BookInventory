@@ -8,7 +8,7 @@
 		// start transaction
     $pdo->beginTransaction();
     // create new group
-    $sql = "INSERT INTO reading_lists (list_name, userID, description, date_added) VALUES (:listName, :userId, :desc, CURDATE());";
+    $sql = "INSERT INTO reading_list (list_name, userID, description, date_added) VALUES (:listName, :userId, :desc, CURDATE());";
     $stmt = pdo($pdo, $sql, ['listName' => $listName, 'userId' => $userId, 'desc' => $desc]);		
 
     // Commit transaction
