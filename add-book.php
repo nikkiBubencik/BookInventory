@@ -40,9 +40,10 @@
 		// Retrieve the value of the 'bookName' field from the POST data
 		$listName = $_POST['listName'];
 		$allBooks = add_book_to_list($pdo, $bookId, $listName, $listNotFound);
-		$created = True;
+		
 		if(!$allBooks){
 			$listNotFound = False;
+			$created = True;
 		}
 	}
 
