@@ -5,6 +5,7 @@
 
 	$groupId = $_GET['groupID'] ?? '';
 	$groupName = $_GET['groupName'] ?? '';
+	
 
 	function search_group_list_by_name(PDO $pdo, string $listName, string $groupId){
 		$sql = "SELECT *
@@ -16,8 +17,8 @@
 		$list = pdo($pdo, $sql, ['listName' => "%$listName%", 'groupId' => $groupId])->fetchAll();		
 		return $list;
 	}
-
 	
+
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
@@ -76,12 +77,13 @@
 					<h1>Group List Lookup</h1>
 					<form action="groupLists.php" method="POST">
 						<div class="form-group">
-							<label for="groupName">Group List Name: </label>
+							<label for="listName">Group List Name: </label>
 						        <input type="text" id="listName" name="listName" required>
 						</div>
 
 						<button type="submit">Lookup Group's List</button>
 						<button onclick="location.href='add-group-user.php?groupId=<?= $groupId ?>&groupName=<?= $groupName ?>'; return false;" type="button">Add New User</button>
+						<button onclick="location.href='groups.php?deleteGroup=True&groupId=<?= $groupId ?>'; return false;" type="button">Leave Group</button>
 
 					</form>
 				</div>
