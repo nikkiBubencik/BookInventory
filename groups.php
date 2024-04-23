@@ -17,25 +17,25 @@
 
 	function leave_group(PDO $pdo, string $groupID, string $userId){
 		//begin transaction
-		// $pdo->beginTransaction();
+		$pdo->beginTransaction();
 
-		// // delete user from group
-		// $sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
-		// $stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
+		// delete user from group
+		$sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
+		$stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
 		
 
 		$memberCountSql = "SELECT count(*) as count FROM user_groups 
   				WHERE groupID = :groupID
       				GROUP BY groupID;";
 		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID])->fetch();
-		echo " count = " . $memberCountResult['count'];
-		// if($memberCountResult == 0: ){
-		// 	// delete group 
-		// 	$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
-		// 	$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
 
-		// }
-		// $pdo->commit();
+		if($memberCountResult == 0: ){
+			// delete group 
+			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
+			$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
+
+		}
+		$pdo->commit();
 	}
 	if($deleteGroup){
 		// *** CHANGE '1' TO USER ONCE LOGIN
