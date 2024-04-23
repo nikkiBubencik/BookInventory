@@ -28,12 +28,12 @@
       				GROUP BY groupID;";
 		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID])->fetch();
 
-		// if($memberCountResult == 0: ){
-		// 	// delete group 
-		// 	$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
-		// 	$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
+		if($memberCountResult['count'] == 0 ){
+			// delete group 
+			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
+			$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
 
-		// }
+		}
 		$pdo->commit();
 	}
 
