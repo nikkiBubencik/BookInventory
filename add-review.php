@@ -9,9 +9,9 @@
 		// start transaction
 	    // $pdo->beginTransaction();
 	    // add user to group
-	    // $AddReviewSQP = "INSERT INTO reviews (bookID, review_text, userID, rating, date_added) VALUES (:bookID, :review_text, :userId, :rating, CURDATE());";
-	    // $stmt = pdo($pdo, $AddReviewSQP, ['bookID' => $bookID, 'review_text' => $review_text, 'userID' => $userId, 'rating' => $rating]); 
-		echo "bookID " . $bookID . " rating " . $rating . " review text " . $review_text;
+	    // $AddReviewSQL = "INSERT INTO reviews (bookID, review_text, userID, rating, date_added) VALUES (:bookID, :review_text, :userId, :rating, CURDATE());";
+	    // $stmt = pdo($pdo, $AddReviewSQL, ['bookID' => $bookID, 'review_text' => $review_text, 'userID' => $userId, 'rating' => $rating]); 
+		echo "userID " . $userID . " Date " . CURDATE();
 	    // Commit transaction
 	    // $pdo->commit();
 	}
