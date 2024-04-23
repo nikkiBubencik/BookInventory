@@ -7,13 +7,12 @@
 
 	function add_review(PDO $pdo, $bookID, string  $review_text, $rating, $userId){
 		// start transaction
-	    // $pdo->beginTransaction();
+	    $pdo->beginTransaction();
 	    // add user to group
-	    // $AddReviewSQL = "INSERT INTO reviews (bookID, review_text, userID, rating, date_added) VALUES (:bookID, :review_text, :userId, :rating, CURDATE());";
-	    // $stmt = pdo($pdo, $AddReviewSQL, ['bookID' => $bookID, 'review_text' => $review_text, 'userId' => $userId, 'rating' => $rating]); 
+	    $AddReviewSQL = "INSERT INTO reviews (bookID, review_text, userID, rating) VALUES (:bookID, :review_text, :userId, :rating);";
+	    $stmt = pdo($pdo, $AddReviewSQL, ['bookID' => $bookID, 'review_text' => $review_text, 'userId' => $userId, 'rating' => $rating]); 
 	    // Commit transaction
-	    // $pdo->commit();
-		echo "date " . DATE() ;
+	    $pdo->commit();
 	}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
