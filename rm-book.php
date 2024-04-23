@@ -5,52 +5,24 @@
 
   	$bookId = $_GET['bookId'];
   	$bookName = $_GET['bookName'];
-	$listName = '';
+	$listID = $_GET['listID']
+	$listName = $_GET['listName'];
 
-	function remove_book_from_list(PDO $pdo, string $bookId, string $listName, &$listNotFound){
+	function remove_book_from_list(PDO $pdo, string $bookId, string $listID){
 	    // start transaction
 	    $pdo->beginTransaction();
-	    
-	    // Query to get listID from listName
-	    $listIdQuery = "SELECT listID FROM reading_list WHERE list_name = :listName;";
-	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
-		
-	    if (!$listIdResult) {
-	        $listNotFound = 1;
-	        $pdo->rollBack();
-	        return ;
-	    }
-
-	   // Check if the book already exists in the list
-	    $listId = $listIdResult['listID'];
-	    $bookExistsQuery = "SELECT COUNT(*) AS count FROM user_books WHERE listID = :listId AND bookID = :bookId";
-	    $bookExistsResult = pdo($pdo, $bookExistsQuery, ['listId' => $listId, 'bookId' => $bookId])->fetch();
-	
-	    if ($bookExistsResult['count'] > 0) {
-	        $listNotFound = 2; 
-	        $pdo->rollBack();
-	        return;
-	    }
-		
-	    // insert book into list
-	    $sql = "DELETE FROM user_books WHERE listID = :listId and bookID = :bookId";
-	    $stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
+	    	
+	    // delete book into list
+	    $sql = "DELETE FROM user_books WHERE listID = :listID and bookID = :bookId";
+	    $stmt = pdo($pdo, $sql, ['listID' => $listID, 'bookId' => $bookId]);
 	
 	    // Commit transaction
 	    $pdo->commit();
 	    return ;
 	}
-
-	$listNotFound = 0;
 	
-	// Check if the request method is POST (i.e, form submitted)
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		// Retrieve the value of the 'bookName' field from the POST data
-		$listName = $_POST['listName'];
-		$listNotFound = remove_book_from_list($pdo, $bookId, $listName, $listNotFound);
-		
-	}
+	remove_book_from_list($pdo, $bookId, $listID);
+	
 
 
 	
@@ -97,26 +69,10 @@
 
 			<div class="rm-book-list-container">
 				<div class="rm-book-list-container">
-					<h1>Remove Book from List</h1>
-					<form action="rm-book.php?bookId=<?= $bookId ?>&bookName=<?= $bookName ?>" method="POST">
-						<div class="form-group">
-							<label for="listName">List Name: </label>
-						        <input type="text" id="listName" name="listName" required>
-						</div>
-
-						<button type="submit">Remove Book from List</button>
-
-					</form>
+					<button onclick="location.href='list_books.php?listID=<?= $listID ?>&listName=<?= $listName ?>'; return false;" type="button">Back to Lists</button>
 				</div>
-            				<?php if(isset($_POST['listName'])): ?>
-						<?php if($listNotFound == 1): ?>
-							<P> <?= $listName ?> not found</P>
-						<?php elseif($listNotFound == 0): ?>
-			            			<p><?= $bookName ?> has been removed from <?= $listName ?> List </p>
-						<?php elseif($listNotFound == 2): ?>
-			            			<p><?= $bookName ?> is not in <?= $listName ?> List </p>
-						<?php endif; ?>
-					<?php endif; ?>
+            				<p><?= $bookName ?> has been removed from <?= $listName ?> List </p>
+					
 			</div>
 
 		</main>
