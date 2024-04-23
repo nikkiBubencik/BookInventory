@@ -3,9 +3,9 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-  	$bookId = $_GET['bookId'];
+  	$bookId = $_GET['bookID'];
   	$bookName = $_GET['bookName'];
-	$listID = $_GET['listID']
+	$listID = $_GET['listID'];
 	$listName = $_GET['listName'];
 
 	function remove_book_from_list(PDO $pdo, string $bookId, string $listID){
