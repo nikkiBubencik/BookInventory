@@ -21,7 +21,7 @@
 	    }
 	    // see if user in group
 	    $UserInGroupQuery = "SELECT COUNT(*) AS count FROM user_groups WHERE userID = :userId AND groupID = :groupId;";
-	    $countResult = pdo($pdo, $UserInGroupQuery, ['groupId' => $groupId, 'userId' => $userId])->fetch();
+	    $countResult = pdo($pdo, $UserInGroupQuery, ['groupId' => $groupId, 'userId' => $userId['userID']])->fetch();
 	    if($countResult['count'] > 0) {
 	        $validUser = 2;
 	        $pdo->rollBack();
