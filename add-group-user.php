@@ -29,15 +29,14 @@
     }
     
     // add user to group
-    $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupID, :userId);";
-    $stmt = pdo($pdo, $userGroupSql, ['groupID' => $groupId, 'userId' => $userId]);
+    $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
+    $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId]);
 
     // Commit transaction
     $pdo->commit();
     return $validUser;
 	}
 
-$created = False;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submitNewGroup'])) {
         $fname = $_POST['newUserFname'];
@@ -110,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					    <?php if($validUser == 0): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> has been added to <?= $groupName ?></p>
 					    <?php elseif($validUser == 1): ?>
-					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?>: Not a valid user</p>
+					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> is not a valid user</p>
 					    <?php elseif($validUser == 2): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> already in <?= $groupName ?></p>
 					    <?php endif; ?>
