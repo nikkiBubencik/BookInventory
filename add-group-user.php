@@ -12,7 +12,7 @@
     $pdo->beginTransaction();
     // get userId
     $userIdSql = "SELECT userID from users WHERE first_name = :fname and last_name = :lname;";
-    $userId = pdo($pdo, $userIdSql, ['fname' => $fname, 'lname' => $lname]);
+    $userId = pdo($pdo, $userIdSql, ['fname' => $fname, 'lname' => $lname])->fetch();
 
     if(!$userId){
         $validUser = 1;
