@@ -3,7 +3,7 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 	$listID = $_GET['listID'];
-	$list_Name = $_GET['listName'];
+	$listName = get_list_name($pdo, $listID);
 	/*
 	 * Retrieve toy information from the database based on the toy ID.
 	 * 
@@ -25,6 +25,12 @@
 
 		// Return the book information (associative array)
 		return $books;
+	}
+
+	function get_list_name(PDO $pdo, string $listID){
+		$sql = "SELECT list_name FROM reading_list WHERE listID = :listID";
+		$listName = pdo($pdo, $sql, ['listID' => $listID])->fetch();
+		return $listName['list_name'];
 	}
 
 	$allBooks = get_books($pdo, $listID);
@@ -70,7 +76,7 @@
 
   		<main>
   			<section class="book-catalog">
-				<h1>List Name: <?= $list_Name ?></h1>
+				<h1>List Name: <?= $listName ?></h1>
 				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
