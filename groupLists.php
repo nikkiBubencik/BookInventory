@@ -81,7 +81,7 @@
 						</div>
 
 						<button type="submit">Lookup Group's List</button>
-						<button onclick="location.href='add-group-user.php?groupId=<?= Id ?>&groupName=<?= $groupName ?>'; return false;" type="button">Add New List</button>
+						<button onclick="location.href='add-group-user.php?groupId=<?= Id ?>&groupName=<?= $groupName ?>'; return false;" type="button">Add New User</button>
 
 					</form>
 				</div>
