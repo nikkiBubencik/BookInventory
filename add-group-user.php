@@ -14,23 +14,23 @@
     $userIdSql = "SELECT userID from users WHERE first_name = :fname and last_name = :lname;";
     $userId = pdo($pdo, $userIdSql, ['fname' => $fname, 'lname' => $lname])->fetch();
 
-    if(!$userId){
-        $validUser = 1;
-        $pdo->rollBack();
-        return $validUser;
-    }
-    // see if user in group
-    $UserInGroupQuery = "SELECT COUNT(*) AS count FROM user_groups WHERE userID = :userId AND groupID = :groupId;";
-    $countResult = pdo($pdo, $UserInGroupQuery, ['groupId' => $groupId, 'userId' => $userId])->fetch();
-    if($countResult['count'] > 0) {
-        $validUser = 2;
-        $pdo->rollBack();
-        return $validUser;
-    }
+    // if(!$userId){
+    //     $validUser = 1;
+    //     $pdo->rollBack();
+    //     return $validUser;
+    // }
+    // // see if user in group
+    // $UserInGroupQuery = "SELECT COUNT(*) AS count FROM user_groups WHERE userID = :userId AND groupID = :groupId;";
+    // $countResult = pdo($pdo, $UserInGroupQuery, ['groupId' => $groupId, 'userId' => $userId])->fetch();
+    // if($countResult['count'] > 0) {
+    //     $validUser = 2;
+    //     $pdo->rollBack();
+    //     return $validUser;
+    // }
     
-    // add user to group
-    $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
-    $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId]);
+    // // add user to group
+    // $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
+    // $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId]);
 
     // Commit transaction
     $pdo->commit();
