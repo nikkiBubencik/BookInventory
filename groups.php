@@ -27,7 +27,7 @@
 		$memberCountSql = "SELECT count(*) as count FROM user_groups 
   				WHERE groupID = :groupID
       				GROUP BY groupID;";
-		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID]);
+		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID])->fetch();
 		echo " count = " . $memberCountResult['count'];
 		// if($memberCountResult == 0: ){
 		// 	// delete group 
