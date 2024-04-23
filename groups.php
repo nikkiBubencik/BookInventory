@@ -17,29 +17,30 @@
 
 	function leave_group(PDO $pdo, string $groupID, string $userId){
 		//begin transaction
-		$pdo->beginTransaction();
+		// $pdo->beginTransaction();
 
-		// delete user from group
-		$sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
-		$stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
+		// // delete user from group
+		// $sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
+		// $stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
 		
 
-		$memberCountSql = "SELECT count(*) as count FROM user_groups 
-  				WHERE groupID = :groupID
-      				GROUP BY :groupID;";
-		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID]);
+		// $memberCountSql = "SELECT count(*) as count FROM user_groups 
+  // 				WHERE groupID = :groupID
+  //     				GROUP BY :groupID;";
+		// $memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID]);
 		
-		if($memberCountResult == 0: ){
-			// delete group 
-			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
-			$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
+		// if($memberCountResult == 0: ){
+		// 	// delete group 
+		// 	$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
+		// 	$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
 
-		}
-		$pdo->commit();
+		// }
+		// $pdo->commit();
 	}
 	if($deleteGroup){
 		// *** CHANGE '1' TO USER ONCE LOGIN
-		leave_group($pdo, $groupId, '1');
+		// leave_group($pdo, $groupId, '1');
+		echo "left";
 	}
 	// Check if the request method is POST (i.e, form submitted)
 	else if ($_SERVER["REQUEST_METHOD"] == "POST") {
