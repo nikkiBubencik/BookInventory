@@ -3,10 +3,10 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-  $validUser = 0;
-  $groupId = $_GET['groupId'];
-  $groupName = $_GET['groupName'];
-echo "groupId: " %groupId;
+	  $validUser = 0;
+	  $groupId = $_GET['groupId'];
+	  $groupName = $_GET['groupName'];
+
 	function add_group_user(PDO $pdo, string $fname, string $lname, string $groupId, $validUser){
 		// start transaction
     $pdo->beginTransaction();
@@ -21,7 +21,7 @@ echo "groupId: " %groupId;
     }
     // see if user in group
     $UserInGroupQuery = "SELECT COUNT(*) AS count FROM user_groups WHERE userID = :userId AND groupID = :groupId;";
-    $stmt = pdo($pdo, $UserInGroupQuery, ['groupID' => $groupId, 'userId' => $userId])->fetch();
+    $countResult = pdo($pdo, $UserInGroupQuery, ['groupID' => $groupId, 'userId' => $userId])->fetch();
     if($countResult['count'] > 0) {
         $validUser = 2;
         $pdo->rollBack();
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <button type="submit" name="submitNewGroup">Add New Group Member</button>
           </form>
 				</div>	
-        
+        				<p> $groupId </p>
           				<?php if(isset($_POST['submitNewGroup'])): ?>
 					    <?php if($validUser == 0): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> has been added to <?= $groupName ?></p>
