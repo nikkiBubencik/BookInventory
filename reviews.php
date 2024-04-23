@@ -88,6 +88,9 @@
 			        <h1><?= $book_title ?></h1>
 
 			        <hr />
+				<form action="add-review.php?bookID=<?= $book_id ?>" method="POST">
+		                    <button type="submit" name="addReview">Add Review</button>
+		                </form>
 					
 				<!-- Dropdown menu for sorting -->
 <!-- 			        <div class="dropdown">
