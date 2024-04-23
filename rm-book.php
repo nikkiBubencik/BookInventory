@@ -30,7 +30,7 @@
 	function get_list_name(PDO $pdo, string $listID){
 		$sql = "SELECT list_name FROM reading_list WHERE listID = :listID";
 		$listName = pdo($pdo, $sql, ['listID' => $listID])->fetch();
-		return $listName['listName'];
+		return $listName['list_name'];
 	}
 	
 	remove_book_from_list($pdo, $bookId, $listID);
