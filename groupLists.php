@@ -74,7 +74,6 @@
 			<div class="group-list-lookup-container">
 				<div class="group-list-lookup-container">
 					<h1>Group List Lookup</h1>
-					<p> groupID <?= $groupId ?></p>
 					<form action="groupLists.php" method="POST">
 						<div class="form-group">
 							<label for="groupName">Group List Name: </label>
