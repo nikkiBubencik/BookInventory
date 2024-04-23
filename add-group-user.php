@@ -32,7 +32,8 @@
 	    // $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
 	    // $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId]); 
 
-		echo "groupId " <?= groupId ?>;
+		echo "groupId " . $groupId ;
+		echo "userUd " . $userId;
 	    // Commit transaction
 	    $pdo->commit();
 	    return $validUser;
