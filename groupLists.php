@@ -3,7 +3,7 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-	$groupId = $_GET['groupId'] ?? '';
+	$groupId = $_GET['groupID'] ?? '';
 	$groupName = $_GET['groupName'] ?? '';
 
 	function search_group_list_by_name(PDO $pdo, string $listName, string $groupId){
