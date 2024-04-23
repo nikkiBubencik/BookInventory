@@ -30,7 +30,7 @@
   
 	    // add user to group
 	    $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
-	    $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId['userID']); 
+	    $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId['userID']]); 
 
 	    // Commit transaction
 	    $pdo->commit();
