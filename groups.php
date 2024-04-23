@@ -3,6 +3,8 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
+	$deleteGroup = $_GET['deleteGroup'] ?? False;
+	$groupId = $_GET['groupId'] ?? '';
 
 	function search_groups_by_name(PDO $pdo, string $groupName, string $userId){
 		$sql = "SELECT *
@@ -13,9 +15,34 @@
 		return $group;
 	}
 
-	
+	function leave_group(PDO $pdo, string $groupID, string $userId){
+		//begin transaction
+		$pdo->beginTransaction();
+
+		// delete user from group
+		$sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
+		$stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
+		
+
+		$memberCountSql = "SELECT count(*) as count FROM user_groups 
+  				WHERE groupID = :groupID
+      				GROUP BY :groupID;";
+		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID]);
+		
+		if($memberCountResult == 0: ){
+			// delete group 
+			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
+			$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
+
+		}
+		$pdo->commit();
+	}
+	if($deleteGroup){
+		// *** CHANGE '1' TO USER ONCE LOGIN
+		leave_group($pdo, $groupId, '1');
+	}
 	// Check if the request method is POST (i.e, form submitted)
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		// Retrieve the value of the 'bookName' field from the POST data
 		$groupName = $_POST['groupName'];
