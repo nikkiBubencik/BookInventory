@@ -39,7 +39,7 @@
 	}
 	if($deleteGroup){
 		// *** CHANGE '1' TO USER ONCE LOGIN
-		// leave_group($pdo, $groupId, '1');
+		leave_group($pdo, $groupId, '1');
 		echo "left";
 	}
 	// Check if the request method is POST (i.e, form submitted)
