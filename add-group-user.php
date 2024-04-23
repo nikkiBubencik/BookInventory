@@ -38,7 +38,7 @@
 	}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['submitNewGroup'])) {
+    if (isset($_POST['submitNewGroupUser'])) {
         $fname = $_POST['newUserFname'];
         $lname = $_POST['newUserLname'];
         $validUser = add_group_user($pdo, $fname, $lname, $groupId, $validUser); 
@@ -101,11 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <input type="text" id="newUserLname" name="newUserLname" required>
               </div>
 
-              <button type="submit" name="submitNewGroup">Add New Group Member</button>
+              <button type="submit" name="submitNewGroupUser">Add New Group Member</button>
           </form>
 				</div>	
-        				<p> <?= $groupId ?> </p>
-          				<?php if(isset($_POST['submitNewGroup'])): ?>
+<!--           				<?php if(isset($_POST['submitNewGroupUser'])): ?>
 					    <?php if($validUser == 0): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> has been added to <?= $groupName ?></p>
 					    <?php elseif($validUser == 1): ?>
@@ -113,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					    <?php elseif($validUser == 2): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> already in <?= $groupName ?></p>
 					    <?php endif; ?>
-					<?php endif; ?>
+					<?php endif; ?> -->
 
 			</div>
 
