@@ -43,7 +43,7 @@
 		echo "left";
 	}
 	// Check if the request method is POST (i.e, form submitted)
-	else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		// Retrieve the value of the 'bookName' field from the POST data
 		$groupName = $_POST['groupName'];
