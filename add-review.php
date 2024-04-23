@@ -13,7 +13,7 @@
 	    // $stmt = pdo($pdo, $AddReviewSQL, ['bookID' => $bookID, 'review_text' => $review_text, 'userId' => $userId, 'rating' => $rating]); 
 	    // Commit transaction
 	    // $pdo->commit();
-		echo "userid " . $userId . " date " . CURDATE();
+		echo "userid " . $userId ;
 	}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
