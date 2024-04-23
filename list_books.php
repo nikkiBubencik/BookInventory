@@ -83,8 +83,9 @@
 		
 		  					<!-- Display authors -->
 		  					<p><?= $book['authors'] ?></p>
+								<p> <?= $book['bookID'] ?></p>
 							</a>
-							<button onclick="location.href='rm-book.php?bookId=<?= $book['bookID'] ?>&bookName=<?= $book['title'] ?>&listID=<?= $listID ?>&listName=<?= $list_Name ?>'; return false;" type="button">Remove Book From List</button>
+							<button onclick="location.href='rm-book.php?bookID=<?= $book['bookID'] ?>&bookName=<?= $book['title'] ?>&listID=<?= $listID ?>&listName=<?= $list_Name ?>'; return false;" type="button">Remove Book From List</button>
 							<br>
 							<hr>
 		  				</div>
