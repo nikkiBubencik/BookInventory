@@ -3,47 +3,59 @@
 	// Include the database connection script
 	require 'includes/database-connection.php';
 
-
 	function search_books_by_name(PDO $pdo, string $bookName){
-		$sql = "SELECT *
-				FROM books
-    				WHERE title LIKE :bookName
+		$sql = "SELECT * 
+				FROM books 
+					WHERE title LIKE :bookName 
 				LIMIT 25;";
 		
 		$books = pdo($pdo, $sql, ['bookName' => "%$bookName%"])->fetchAll();		
 		return $books;
 	}
 
+	function search_books_by_author(PDO $pdo, string $authorName){
+		$sql = "SELECT *
+				FROM books
+					WHERE authors LIKE :authorName
+				LIMIT 25;";
+		
+		$books = pdo($pdo, $sql, ['authorName' => "%$authorName%"])->fetchAll();		
+		return $books;
+	}
+
+	function search_books_by_year(PDO $pdo, string $year){
+		$sql = "SELECT *
+				FROM books
+					WHERE year_published LIKE :year
+				LIMIT 25;";
+		
+		$books = pdo($pdo, $sql, ['year' => "%$year%"])->fetchAll();		
+		return $books;
+	}
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		// Retrieve the value of the 'bookName' field from the POST data
-		$bookName = $_POST['bookName'];
+		$searchBy = $_POST['searchBy'] ?? "title";
+		$bookName = $_POST['bookName'] ?? "";
+		
+		// Check which radio button is selected
+		if ($searchBy == "title") {
+			// Code for searching by title
+			$books = search_books_by_name($pdo, $bookName);
+		} elseif ($searchBy == "author") {
+			// Code for searching by author
+			$books = search_books_by_author($pdo, $bookName);
+		} elseif ($searchBy == "year") {
+			// Code for searching by year
+			$books = search_books_by_year($pdo, $bookName);
+		}
 	}
 	else{
-		$bookName = '';
+		$bookName = "";
+		$searchBy = "title";
 	}
-	// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
-	$allBooks = search_books_by_name($pdo, $bookName);
-	
-	// // Check if the book exists
-	// if ($list) {
-	// 	// If the list exists, redirect to list.php with listID parameter
-	// 	header("Location: list.php?listID=" . $list['listID']);
-	// 	exit(); 
-	// }
-	
-
-	// function get_all_user_lists(PDO $pdo, $userId) {
-	//     	$sql = "SELECT * FROM reading_list WHERE userID = :userId";
-	// 	$lists = pdo($pdo, $sql, ['userId' => $userId])->fetchAll();		
-
-	//     	return $lists;
-	// }
-	// CHNAGE '1' to $userId so its for the user who is logged in
-	// $allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
-// Closing PHP tag  ?> 
+ ?> 
 
 <!DOCTYPE>
 <html>
@@ -84,32 +96,40 @@
 
 		<main>
 
-			<div class="book-lookup-container">
-				<div class="book-lookup-container">
+			<div class="book-lookup-container" style="width:40%; margin:auto; text-align:center; margin-bottom:10px;">
+				<div class="book-lookup-container" >
 					<h1>Book Lookup</h1>
 					<form action="book-cat.php" method="POST">
-						<div class="form-group">
-							<label for="bookName">Book Name: </label>
-						        <input type="text" id="bookName" name="bookName" required>
+					<label for="searchBy">Search By: </label>
+						<div class="form-group" style="display:flex;">
+							<input type="radio" id="title" name="searchBy" value="title" checked>
+							<label for="title">Title</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="author" name="searchBy" value="author">
+							<label for="author">Author</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="year" name="searchBy" value="year">
+							<label for="year">Year Published</label>
 						</div>
-
+						</div>
+						<div class="form-group" style="width:100%;">
+						        <input type="text" id="bookName" name="bookName" >
+						</div>
 						<button type="submit">Lookup Book</button>
 					</form>
 				</div>
 				
-				<div class="Books-names">
-					<ul style="list-style-type: none; padding: 0;">
-				        <?php foreach ($allBooks as $book): ?>
-						<li><a href="book.php?bookID=<?= $book['bookID'] ?>">
-						<?= $book['title'] ?></a></li>
-						<?= $book['authors'] ?>
-					<hr>
-				        <?php endforeach; ?>
-				    	</ul>
+				<div class="Books-names" style="margin:auto; width: 40%; text-align:center; background-color: lightgray;">
+				<ul style="list-style-type: none; padding: 0;">
+				        
+						<ul style="list-style-type: none; padding: 0;">
+                    <?php if (isset($books) && !empty($books)): ?>
+                        <?php foreach ($books as $book): ?>
+                            <li><a href="book.php?bookID=<?= $book['bookID']; ?>"><?= $book['title'] ?></a></li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li>No records found.</li>
+                    <?php endif; ?>
+                </ul>
 				</div>
-				
-				
-
 			</div>
 
 		</main>
