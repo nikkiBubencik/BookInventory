@@ -6,7 +6,7 @@
   $validUser = 0;
   $groupId = $_GET['groupId'];
   $groupName = $_GET['groupName'];
-
+echo "groupId: " %groupId;
 	function add_group_user(PDO $pdo, string $fname, string $lname, string $groupId, $validUser){
 		// start transaction
     $pdo->beginTransaction();
