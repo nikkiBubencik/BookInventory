@@ -85,6 +85,7 @@
 		  					<p><?= $book['authors'] ?></p>
 							</a>
 							<button onclick="location.href='rm-book.php?bookId=<?= $book['bookId'] ?>&bookName=<?= $book['title'] ?>&listID=<?= $listID ?>&listName=<?= $list_Name ?>'; return false;" type="button">Remove Book From List</button>
+							<br>
 							<hr>
 		  				</div>
 					<?php endforeach; ?>
