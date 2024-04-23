@@ -4,8 +4,15 @@
 	require 'includes/database-connection.php';
 
   	$bookId = $_GET['bookId'];
-  	$bookName = $_GET['bookName'];
+	$bookName = get_book_title($pdo, $bookId);
+  	// $bookName = $_GET['bookName'];
 	$listName = '';
+
+	function get_book_title(PDO $pdo, string $bookId){
+		$sql = "SELECT title FROM books WHERE bookID = :bookId";
+		$bookTitle = pdo($pdo, $sql, ['bookId' => $bookId])->fetch();
+		return $bookTitle['title'];
+	}
 
 	function add_book_to_list(PDO $pdo, string $bookId, string $listName, $listNotFound){
 	    // start transaction
@@ -98,7 +105,7 @@
 			<div class="add-book-list-container">
 				<div class="add-book-list-container">
 					<h1>Add Book to List</h1>
-					<form action="add-book.php?bookId=<?= $bookId ?>&bookName=<?= $bookName ?>" method="POST">
+					<form action="add-book.php?bookId=<?= $bookId ?>" method="POST">
 						<div class="form-group">
 							<label for="listName">List Name: </label>
 						        <input type="text" id="listName" name="listName" required>
