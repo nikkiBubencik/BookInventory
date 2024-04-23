@@ -30,6 +30,9 @@
 
 		// if no one remains in group delete it
 		if($memberCountResult['count'] == 0 ){
+			// delete group lists
+			$deleteGroupLists = "DELETE FROM group_lists WHERE groupID = :groupID;";
+			$stmt = pdo($pdo, $deleteGroupLists, ['groupID' => $groupID]);
 			// delete group 
 			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
 			$stmt = pdo($pdo, $deletGroupSql, ['groupID' => $groupID]);
