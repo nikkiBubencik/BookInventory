@@ -18,12 +18,12 @@
 	function leave_group(PDO $pdo, string $groupID, string $userId){
 		//begin transaction
 		$pdo->beginTransaction();
-
+		echo " before dete user\n" ;
 		// delete user from group
 		$sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
 		$stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
 		
-
+		echo "before member count";
 		$memberCountSql = "SELECT count(*) as count FROM user_groups 
   				WHERE groupID = :groupID
       				GROUP BY groupID;";
@@ -37,10 +37,10 @@
 		}
 		$pdo->commit();
 	}
+
 	if($deleteGroup){
 		// *** CHANGE '1' TO USER ONCE LOGIN
 		leave_group($pdo, $groupId, '1');
-		echo "left";
 	}
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
