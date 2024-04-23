@@ -16,22 +16,32 @@
 	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
 		
 	    if (!$listIdResult) {
-	        $listNotFound = True;
+	        $listNotFound = 1;
 	        $pdo->rollBack();
 	        return $listNotFound;
 	    }
-	
-	    // insert book into list
+
+	   // Check if the book already exists in the list
 	    $listId = $listIdResult['listID'];
-			$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, CURDATE())";
-			$stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
+	    $bookExistsQuery = "SELECT COUNT(*) AS count FROM user_books WHERE listID = :listId AND bookID = :bookId";
+	    $bookExistsResult = pdo($pdo, $bookExistsQuery, ['listId' => $listId, 'bookId' => $bookId])->fetch();
+	
+	    if ($bookExistsResult['count'] > 0) {
+	        $listNotFound = 2; 
+	        $pdo->rollBack();
+	        return $listNotFound;
+	    }
+		
+	    // insert book into list
+	    $sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, CURDATE())";
+	    $stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
 	
 	    // Commit transaction
 	    $pdo->commit();
 	    return $listNotFound;
 	}
 
-	$listNotFound = False;
+	$listNotFound = 0;
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -99,10 +109,12 @@
 					</form>
 				</div>
             				<?php if(isset($_POST['listName'])): ?>
-						<?php if($listNotFound): ?>
+						<?php if($listNotFound == 1): ?>
 							<P> <?= $listName ?> not found</P>
-						<?php else: ?>
+						<?php elseif($listNotFound == 0): ?>
 			            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
+						<?php elseif($listNotFound == 2): ?>
+			            			<p><?= $bookName ?> is already in <?= $listName ?> List </p>
 						<?php endif; ?>
 					<?php endif; ?>
 			</div>
