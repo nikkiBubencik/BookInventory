@@ -5,7 +5,7 @@
 
 	  $bookID = $_GET['bookID'];
 
-	function add_reviewr(PDO $pdo, $bookID, string  $review_text, $rating, $userId){
+	function add_review(PDO $pdo, $bookID, string  $review_text, $rating, $userId){
 		// start transaction
 	    $pdo->beginTransaction();
 	    // add user to group
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $review_text = $_POST['review_text'];
         $rating = $_POST['rating'];
       // *** CHANGE FROM '1' TO USERID
-        add_reviewr($pdo, $bookID, $review_text, $rating, '1'); 
+        add_review($pdo, $bookID, $review_text, $rating, 1); 
         
     } 
     
