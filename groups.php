@@ -18,16 +18,17 @@
 	function leave_group(PDO $pdo, string $groupID, string $userId){
 		//begin transaction
 		$pdo->beginTransaction();
-		echo " before dete user\n" ;
 		// delete user from group
 		$sql = "DELETE FROM user_groups WHERE groupID = :groupID and userID = :userId;";
 		$stmt = pdo($pdo, $sql, ['groupID' => $groupID, 'userId' => $userId]);
-		
+
+		// get count of users in group
 		$memberCountSql = "SELECT count(*) as count FROM user_groups 
   				WHERE groupID = :groupID
       				GROUP BY groupID;";
 		$memberCountResult = pdo($pdo, $memberCountSql, ['groupID' => $groupID])->fetch();
 
+		// if no one remains in group delete it
 		if($memberCountResult['count'] == 0 ){
 			// delete group 
 			$deletGroupSql = "DELETE FROM groups WHERE groupID = :groupID;";
