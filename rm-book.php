@@ -4,9 +4,9 @@
 	require 'includes/database-connection.php';
 
   	$bookId = $_GET['bookID'];
-  	$bookName = $_GET['bookName'];
+  	$bookName = get_book_title($pdo, $bookId);
 	$listID = $_GET['listID'];
-	$listName = $_GET['listName'];
+	$listName = get_list_name($pdo, $listID);
 
 	function remove_book_from_list(PDO $pdo, string $bookId, string $listID){
 	    // start transaction
@@ -19,6 +19,18 @@
 	    // Commit transaction
 	    $pdo->commit();
 	    return ;
+	}
+
+	function get_book_title(PDO $pdo, string $bookId){
+		$sql = "SELECT title FROM books WHERE bookID = :bookId";
+		$bookTitle = pdo($pdo, $sql, ['bookId' => $bookId])->fetch();
+		return $bookTitle['title'];
+	}
+
+	function get_list_name(PDO $pdo, string $listID){
+		$sql = "SELECT list_name FROM reading_list WHERE listID = :listID";
+		$listName = pdo($pdo, $sql, ['listID' => $listID])->fetch();
+		return $listName['listName'];
 	}
 	
 	remove_book_from_list($pdo, $bookId, $listID);
@@ -69,7 +81,7 @@
 
 			<div class="rm-book-list-container">
 				<div class="rm-book-list-container">
-					<button onclick="location.href='list_books.php?listID=<?= $listID ?>&listName=<?= $listName ?>'; return false;" type="button">Back to Lists</button>
+					<button onclick="location.href='list_books.php?listID=<?= $listID ?>'; return false;" type="button">Back to Lists</button>
 				</div>
             				<p><?= $bookName ?> has been removed from <?= $listName ?> List </p>
 					
