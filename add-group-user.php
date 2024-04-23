@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<div class="group-add-container">
 				<div class="group-add-container">
 					<h1>Add User to Group</h1>
-					<form action="add-group-user.php" method="POST">
+					<form action="add-group-user.php?groupId=<?= $groupId ?>&groupName=<?= $groupName ?>" method="POST">
               <div class="form-group">
                   <label for="newUserFname">First Name:</label>
                   <input type="text" id="newUserFname" name="newUserFname" required>
@@ -106,16 +106,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </form>
 				</div>	
         
-          <?php if(isset($_POST['submitNewGroup'])): ?>
-        
-        				<?php if($validUser == 0): ?>
-                    <p> <?= $fname ?> <?=$lname ?> has been added to <?= $groupName ?></p>
-                <?php elseif($validUser == 1): ?>
-                    <p> <?= $fname ?> <?=$lname ?>: Not a valid user</p>
-                <?php elseif($validUser == 2): ?>
-                    <p> <?= $fname ?> <?=$lname ?> already in <?= $groupName ?></p>
-                <?php endif; ?>
-          <?php endif; ?>
+          				<?php if(isset($_POST['submitNewGroup'])): ?>
+					    <?php if($validUser == 0): ?>
+					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> has been added to <?= $groupName ?></p>
+					    <?php elseif($validUser == 1): ?>
+					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?>: Not a valid user</p>
+					    <?php elseif($validUser == 2): ?>
+					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> already in <?= $groupName ?></p>
+					    <?php endif; ?>
+					<?php endif; ?>
 
 			</div>
 
