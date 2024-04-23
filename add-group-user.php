@@ -27,8 +27,8 @@
 	        $pdo->rollBack();
 	        return $validUser;
 	    }
-    		echo "groupId " <?= $groupId ?>;
-<!-- 		echo "userId " <?= $userId ?>; -->
+  //   		echo "groupId " <?= $groupId ?>;
+		// echo "userId " <?= $userId ?>;
 	    // add user to group
 <!-- 	    $userGroupSql = "INSERT INTO user_groups (groupID, userID) VALUES (:groupId, :userId);";
 	    $stmt = pdo($pdo, $userGroupSql, ['groupId' => $groupId, 'userId' => $userId]); -->
