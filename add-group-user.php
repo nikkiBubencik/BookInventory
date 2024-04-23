@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <button type="submit" name="submitNewGroupUser">Add New Group Member</button>
           </form>
 				</div>	
-<!--           				<?php if(isset($_POST['submitNewGroupUser'])): ?>
+           				<?php if(isset($_POST['submitNewGroupUser'])): ?>
 					    <?php if($validUser == 0): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> has been added to <?= $groupName ?></p>
 					    <?php elseif($validUser == 1): ?>
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					    <?php elseif($validUser == 2): ?>
 					        <p><?= $_POST['newUserFname'] ?> <?= $_POST['newUserLname'] ?> already in <?= $groupName ?></p>
 					    <?php endif; ?>
-					<?php endif; ?> -->
+					<?php endif; ?> 
 
 			</div>
 
