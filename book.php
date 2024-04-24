@@ -2,10 +2,9 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
 
 	$book_id = $_GET['bookID'];
-
-
 
 	function book_info(PDO $pdo, string $id){
 		$sql = " SELECT *
@@ -35,34 +34,15 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
-		
 			<div class="book-details-container">
+			<?php if (isset($_SESSION['userID'])) : ?>
 				<button onclick="location.href='add-book.php?bookId=<?= $info['bookID'] ?>'; return false;" type="button">Add to List</button>
+				<?php endif; ?>
 
+
+				<a href="javascript:window.history.back();">Back</a>
+				
 				<div class="book-details">
 
 				<!-- Display title of book -->

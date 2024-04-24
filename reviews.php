@@ -2,13 +2,14 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
 
 	$book_id = $_GET['bookID'];
   	$book_title = $_GET['title'];
 
 
 	function get_reviews(PDO $pdo, string $id){
-		$sql = " SELECT r.rating, r.review_text, u.first_name
+		$sql = " SELECT r.rating, r.review_text, u.username
 				FROM reviews as r JOIN users as u ON r.userID = u.userID
 				WHERE bookID= :id";
 		// switch ($sortOrder) {
@@ -55,29 +56,6 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 		
 			<div class="book-details-container">
@@ -102,19 +80,28 @@
 						<a href="?sort=newest" <?php if ($sortOrder == 'newest') echo 'class="selected"'; ?>>Newest</a>
 				  	</div>
 				</div> -->
+                <a href="book.php?bookID=<?= $book_id ?>">Back</a>
 				<br>	
 			        <h3>Reviews</h3>
 
 			        <!-- Display all reviews -->
 			        <ul>
-			        	<?php foreach ($all_reviews as $review): ?>
-			            	<li>
-			            		<strong>Rating:</strong> <?= $review['rating'] ?><br>
-			            		<strong>Review:</strong> <?= $review['review_text'] ?><br>
-			            		<strong>User:</strong> <?= $review['first_name'] ?>
-			            	</li>
-					<hr>
-			            <?php endforeach; ?>
+					<?php if (empty($all_reviews)): ?>
+    <!-- No reviews message -->
+    <p>No reviews, yet.</p>
+<?php else: ?>
+    <!-- Display all reviews -->
+    <ul>
+        <?php foreach ($all_reviews as $review): ?>
+            <li>
+                <strong>Rating:</strong> <?= $review['rating'] ?><br>
+                <strong>Review:</strong> <?= $review['review_text'] ?><br>
+                <strong>User:</strong> <?= $review['username'] ?>
+            </li>
+            <hr>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
 			        </ul>
 			        
 			    </div>

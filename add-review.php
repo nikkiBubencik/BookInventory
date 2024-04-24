@@ -2,6 +2,7 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
 
 	  $bookID = $_GET['bookID'];
 
@@ -19,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submitNewReview'])) {
         $review_text = $_POST['review_text'];
         $rating = $_POST['rating'];
-      // *** CHANGE FROM '1' TO USERID
-        add_review($pdo, $bookID, $review_text, $rating, 1); 
+        add_review($pdo, $bookID, $review_text, $rating, $_SESSION['userID']); 
         
     } 
     
@@ -42,29 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 
 			<div class="group-add-container">
@@ -80,12 +57,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <input type="text" id="rating" name="rating" required>
               </div>
 
-              <button type="submit" name="submitNewReview">Add Reviewr</button>
+              <button type="submit" name="submitNewReview">Add Review</button>
           </form>
 				</div>	
-           				<?php if(isset($_POST['submitNewReview'])): ?>
-					            <p> Review Added</p>
-					<?php endif; ?> 
+
+			<?php
+				// Check if the form is submitted
+				if(isset($_POST['submitNewReview'])) {
+					// Redirect to reviews.php with bookID and title parameters
+					// $bookID = $info['bookID'];
+					// $title = $info['title'];
+					$book_id = $_GET['bookID'];
+					$book_title = $_GET['title'];
+					header("Location: reviews.php?bookID=$bookID&title=$title");
+					exit; // Make sure to exit after redirection
+				}
+			?>
+
 
 			</div>
 

@@ -2,6 +2,8 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
+
 	$listID = $_GET['listID'];
 	$listName = get_list_name($pdo, $listID);
 	/*
@@ -51,32 +53,10 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
   		<main>
   			<section class="book-catalog">
 				<h1>List Name: <?= $listName ?></h1>
+				<a href="javascript:window.history.back();">Back</a>
 				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
@@ -90,7 +70,21 @@
 		  					<!-- Display authors -->
 		  					<p><?= $book['authors'] ?></p>
 							</a>
-							<button onclick="location.href='rm-book.php?bookID=<?= $book['bookID'] ?>&listID=<?= $listID ?>'; return false;" type="button">Remove Book From List</button>
+
+							<?php
+    // Retrieve the user ID associated with the list ID
+    $sql = "SELECT userID FROM reading_list WHERE listID = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$listID]);
+    $listUserID = $statement->fetchColumn();
+?>
+
+<?php if (isset($_SESSION['userID']) && $_SESSION['userID'] == $listUserID) : ?>
+    <button onclick="location.href='rm-book.php?bookID=<?= $book['bookID'] ?>&listID=<?= $listID ?>'; return false;" type="button">Remove Book From List</button>
+<?php endif; ?>
+
+
+
 							<br>
 							<hr>
 		  				</div>

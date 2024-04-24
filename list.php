@@ -4,33 +4,16 @@
 	require 'includes/database-connection.php';
 	include 'includes/header-member.php';
 
-	function find_lists_by_name(PDO $pdo, string $listName, string $userId){
+
+	function find_lists_by_name(PDO $pdo, string $listName){
 		$sql = "SELECT *
 				FROM reading_list
-				WHERE list_name LIKE :listName 
-    				AND userID = :userId;";
+				WHERE list_name LIKE :listName;";
 		
-		$list = pdo($pdo, $sql, ['listName' => "%$listName%", 'userId' => $userId])->fetchAll();		
+		$list = pdo($pdo, $sql, ['listName' => "%$listName%"])->fetchAll();		
 		return $list;
 	}
 
-	
-	// Check if the request method is POST (i.e, form submitted)
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		// Retrieve the value of the 'listName' field from the POST data
-		$listName = $_POST['listName'];
-
-		// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
-		$lists = find_lists_by_name($pdo, $listName, '1');
-
-		// Check if the list exists
-		if ($list) {
-			// If the list exists, redirect to list.php with listID parameter
-			header("Location: list.php?listID=" . $list['listID']);
-			exit(); 
-		}
-	}
 
 	function get_all_user_lists(PDO $pdo, $userId) {
 	    	$sql = "SELECT * FROM reading_list WHERE userID = :userId";
@@ -39,7 +22,7 @@
 	    	return $lists;
 	}
 	// CHNAGE '1' to $userId so its for the user who is logged in
-	$allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
+	// $allLists = ($_SERVER["REQUEST_METHOD"] == "POST") ? $lists : get_all_user_lists($pdo, '1');
 // Closing PHP tag  ?> 
 
 <!DOCTYPE>
@@ -56,7 +39,6 @@
 	</head>
 
 	<body>
-
 		<main>
 
 			<div class="list-lookup-container">
@@ -72,22 +54,64 @@
 						<button onclick="location.href='new-list.php'; return false;" type="button">Add New List</button>
 
 					</form>
+
+<div class = "search-results">
+<h1>Search Results</h1>
+
+			<?php
+        // Check if the request method is POST (i.e., form submitted)
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Retrieve the value of the 'listName' field from the POST data
+            $listName = $_POST['listName'];
+            // Search for lists by name
+            $lists = find_lists_by_name($pdo, $listName, $_SESSION['userID']);
+            // Check if any lists are found
+            if ($lists) {
+                // If lists are found, display them
+foreach ($lists as $list) {
+    echo "<p><a href='list_books.php?listID=" . $list['listID'] . "&listName=" . $list['list_name'] . "'>" . $list['list_name'] . "</a></p>";
+}
+
+            } else {
+                // If no lists are found, display a message
+                echo "<p>No lists found.</p>";
+            }
+        }
+        ?>
+</div>
 				</div>
 				
+
+
 				<div class="list-names">
-				    	<h2>Your Lists</h2>
-				    	<ul>
-				        <?php foreach ($allLists as $list): ?>
-						<li><a href="list_books.php?listID=<?= $list['listID'] ?>&listName=<?= $list['list_name'] ?>">
-						<?= $list['list_name'] ?></a></li>
-				        <?php endforeach; ?>
-				    	</ul>
-				</div>
+					<h2>Your Lists</h2>
+					<ul>
+						<?php 
+						// Assuming $pdo is your database connection
+						// Retrieve userID from the session
+						$userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+
+						if ($userID === null) {
+							// If the user is not logged in, display the message and link
+							echo '<li><a href="login.php">Log in</a> to make a list.</li>';
+						} else {
+
+						// Query to fetch lists belonging to the current user
+						$sql = "SELECT * FROM reading_list WHERE userID = ?";
+						$statement = $pdo->prepare($sql);
+						$statement->execute([$userID]);
+						$userLists = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+						// Iterate through the user's lists
+						foreach ($userLists as $list): ?>
+							<li><a href="list_books.php?listID=<?= $list['listID'] ?>&listName=<?= $list['list_name'] ?>">
+							<?= $list['list_name'] ?></a></li>
+						<?php endforeach; } ?>
+					</ul>				</div>
 				
 				
 
 			</div>
-
 		</main>
 
 	</body>
