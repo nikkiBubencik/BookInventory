@@ -64,7 +64,7 @@
             // Retrieve the value of the 'listName' field from the POST data
             $listName = $_POST['listName'];
             // Search for lists by name
-            $lists = find_lists_by_name($pdo, $listName, $_SESSION['userID']);
+            $lists = find_lists_by_name($pdo, $listName);
             // Check if any lists are found
             if ($lists) {
                 // If lists are found, display them

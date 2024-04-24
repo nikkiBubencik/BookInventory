@@ -41,7 +41,7 @@
 				<?php endif; ?>
 
 
-				<a href="javascript:window.history.back();">Back</a>
+				<a href="javascript:window.history.back();" class="back-button">Back</a>
 				
 				<div class="book-details">
 

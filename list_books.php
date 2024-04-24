@@ -55,8 +55,8 @@
 	<body>
   		<main>
   			<section class="book-catalog">
-				<h1>List Name: <?= $listName ?></h1>
-				<a href="javascript:window.history.back();">Back</a>
+				<h1 class="page-header">List Name: <?= $listName ?></h1>
+				<a href="javascript:window.history.back();" class="back-button">Back</a>
 				<br>
 				<?php if (!empty($allBooks)) : ?>
 					<?php foreach ($allBooks as $book): ?>
