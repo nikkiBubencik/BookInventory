@@ -2,6 +2,7 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';		
 
 	function search_books_by_name(PDO $pdo, string $bookName){
 		$sql = "SELECT * 
@@ -71,29 +72,6 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 
 			<div class="book-lookup-container" style="width:40%; margin:auto; text-align:center; margin-bottom:10px;">
