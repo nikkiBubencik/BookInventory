@@ -1,3 +1,5 @@
+<?php include 'includes/header-member.php'; ?>
+
 <!DOCTYPE>
 <html>
 
@@ -12,29 +14,6 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 			<div class="about-container">
 				<h1>About Book Inventory</h1>
@@ -46,6 +25,5 @@
 				<p>So come on in, explore our selection, and let your inner child run free at Book Inventory!</p>
 			</div>
 		</main>
-
 	</body>
 </html>
