@@ -55,8 +55,7 @@
 	else{
 		$groupName = '';
 	}
-	// ***CHANGE FROM '1' TO USERID WHEN WE GET A LOGIN***
-	$allGroups = search_groups_by_name($pdo, $groupName, '1');
+	$allGroups = search_groups_by_name($pdo, $groupName, $_SESSION['userID']);
 	
 // Closing PHP tag  ?> 
 

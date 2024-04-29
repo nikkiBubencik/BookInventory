@@ -2,6 +2,7 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
 
   	$bookId = $_GET['bookId'];
 	$bookName = get_book_title($pdo, $bookId);
@@ -13,50 +14,46 @@
 		$bookTitle = pdo($pdo, $sql, ['bookId' => $bookId])->fetch();
 		return $bookTitle['title'];
 	}
-
-	function add_book_to_list(PDO $pdo, string $bookId, string $listName, $listNotFound){
-	    // start transaction
-	    $pdo->beginTransaction();
-	    
-	    // Query to get listID from listName
-	    $listIdQuery = "SELECT listID FROM reading_list WHERE list_name = :listName;";
-	    $listIdResult = pdo($pdo, $listIdQuery, ['listName' => $listName])->fetch();		
-		
-	    if (!$listIdResult) {
-	        $listNotFound = 1;
-	        $pdo->rollBack();
-	        return $listNotFound;
-	    }
-
-	   // Check if the book already exists in the list
-	    $listId = $listIdResult['listID'];
-	    $bookExistsQuery = "SELECT COUNT(*) AS count FROM user_books WHERE listID = :listId AND bookID = :bookId";
-	    $bookExistsResult = pdo($pdo, $bookExistsQuery, ['listId' => $listId, 'bookId' => $bookId])->fetch();
 	
-	    if ($bookExistsResult['count'] > 0) {
-	        $listNotFound = 2; 
-	        $pdo->rollBack();
-	        return $listNotFound;
-	    }
+	function add_book_to_list(PDO $pdo, string $bookId, int $listId, $listNotFound){
+		// start transaction
+		$pdo->beginTransaction();
 		
-	    // insert book into list
-	    $sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, CURDATE())";
-	    $stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
+		// Check if the book already exists in the list
+		$bookExistsQuery = "SELECT COUNT(*) AS count FROM user_books WHERE listID = :listId AND bookID = :bookId";
+		$bookExistsResult = pdo($pdo, $bookExistsQuery, ['listId' => $listId, 'bookId' => $bookId])->fetch();
 	
-	    // Commit transaction
-	    $pdo->commit();
-	    return $listNotFound;
+		if ($bookExistsResult['count'] > 0) {
+			$listNotFound = 2; 
+			$pdo->rollBack();
+			return $listNotFound;
+		}
+		
+		// insert book into list
+		$sql = "INSERT INTO user_books (listID, bookID, date_added) VALUES (:listId, :bookId, CURDATE())";
+		$stmt = pdo($pdo, $sql, ['listId' => $listId, 'bookId' => $bookId]);
+	
+		// Commit transaction
+		$pdo->commit();
+		return $listNotFound;
 	}
-
+	
 	$listNotFound = 0;
 	
 	// Check if the request method is POST (i.e, form submitted)
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		// Retrieve the value of the 'bookName' field from the POST data
-		$listName = $_POST['listName'];
-		$listNotFound = add_book_to_list($pdo, $bookId, $listName, $listNotFound);
-		
+		// $listName = $_POST['listName'];
+		// $listNotFound = add_book_to_list($pdo, $bookId, $listName, $listNotFound);
+		$selectedLists = $_POST['lists'];
+
+		// Loop through each selected list
+		foreach ($selectedLists as $selectedListId) {
+			// Add the book to the selected list
+			$listNotFound = add_book_to_list($pdo, $bookId, $selectedListId, $listNotFound);
+		}
+			
 	}
 
 
@@ -77,51 +74,44 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 
 			<div class="add-book-list-container">
 				<div class="add-book-list-container">
-					<h1>Add Book to List</h1>
+					<h1>Add <?= $bookName ?> to your Lists</h1>
 					<form action="add-book.php?bookId=<?= $bookId ?>" method="POST">
 						<div class="form-group">
-							<label for="listName">List Name: </label>
-						        <input type="text" id="listName" name="listName" required>
+							<label for="listName">Select Lists: </label>
+							<?php
+							// Assuming $pdo is your database connection
+							// Retrieve userID from the session
+							$userID = $_SESSION['userID'];
+
+							// Query to fetch lists belonging to the current user
+							$sql = "SELECT * FROM reading_list WHERE userID = ?";
+							$statement = $pdo->prepare($sql);
+							$statement->execute([$userID]);
+							$userLists = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+							// Iterate through the user's lists
+							foreach ($userLists as $list) {
+								echo '<div><input type="checkbox" id="' . $list['listID'] . '" name="lists[]" value="' . $list['listID'] . '"><label for="' . $list['listID'] . '">' . $list['list_name'] . '</label></div>';
+							}
+							?>
 						</div>
 
 						<button type="submit">Add Book to List</button>
+						<a href="javascript:window.history.back();" class="back-button">Back</a>
 
 					</form>
 				</div>
-            				<?php if(isset($_POST['listName'])): ?>
+            				<?php if(isset($_POST['lists'])): ?>
 						<?php if($listNotFound == 1): ?>
 							<P> <?= $listName ?> not found</P>
 						<?php elseif($listNotFound == 0): ?>
-			            			<p><?= $bookName ?> has been added to <?= $listName ?> List </p>
+			            			<p><?= $bookName ?> has been added to the selected lists<?= $listName ?> List </p>
 						<?php elseif($listNotFound == 2): ?>
-			            			<p><?= $bookName ?> is already in <?= $listName ?> List </p>
+			            			<p><?= $bookName ?> is already in one or more of the selected lists </p>
 						<?php endif; ?>
 					<?php endif; ?>
 			</div>

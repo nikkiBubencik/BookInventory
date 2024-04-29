@@ -2,7 +2,7 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
-
+	include 'includes/header-member.php';
 
 	function add_new_group(PDO $pdo, string $userId, string $groupName){
 		// start transaction
@@ -27,8 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submitNewGroup'])) {
         $newGroupName = $_POST['newGroupName'];
         // create new group
-        // **** CHANGE '1' with the actual userID when login implement 
-        add_new_group($pdo, '1', $newGroupName); 
+        add_new_group($pdo, $_SESSION['userID'], $newGroupName); 
         $created = True;
     } 
     
@@ -50,29 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 
 			<div class="group-lookup-container">
@@ -90,7 +66,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 				<?php if($created): ?>
             <p>Group "<?php echo $newGroupName; ?>" has been created.</p>
+					<?php
+						// Redirect back to list.php after displaying the message
+						header("Location: groups.php");
+						exit; // Make sure to exit after redirection
+					?>
         <?php endif; ?>
+
 
 			</div>
 

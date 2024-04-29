@@ -1,5 +1,4 @@
 <?php   										// Opening PHP tag
-	
 	// Include the database connection script
 	require 'includes/database-connection.php';
 	include 'includes/header-member.php';		
@@ -13,7 +12,6 @@
 		$books = pdo($pdo, $sql, ['bookName' => "%$bookName%"])->fetchAll();		
 		return $books;
 	}
-
 	function search_books_by_author(PDO $pdo, string $authorName){
 		$sql = "SELECT *
 				FROM books
@@ -23,7 +21,6 @@
 		$books = pdo($pdo, $sql, ['authorName' => "%$authorName%"])->fetchAll();		
 		return $books;
 	}
-
 	function search_books_by_year(PDO $pdo, string $year){
 		$sql = "SELECT *
 				FROM books
@@ -78,7 +75,7 @@
 				<div class="book-lookup-container" >
 					<h1>Book Lookup</h1>
 					<form action="book-cat.php" method="POST">
-					<label for="searchBy">Search By: </label>
+						<label for="searchBy">Search By: </label>
 						<div class="form-group" style="display:flex;">
 							<input type="radio" id="title" name="searchBy" value="title" checked>
 							<label for="title">Title</label>&nbsp;&nbsp;&nbsp;
@@ -106,7 +103,10 @@
                     <?php else: ?>
                         <li>No records found.</li>
                     <?php endif; ?>
-                </ul>
+
+
+
+				</ul>
 				</div>
 			</div>
 

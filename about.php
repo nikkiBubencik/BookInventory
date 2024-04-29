@@ -25,5 +25,6 @@
 				<p>So come on in, explore our selection, and let your inner child run free at Book Inventory!</p>
 			</div>
 		</main>
+
 	</body>
 </html>

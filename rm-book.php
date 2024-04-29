@@ -2,6 +2,7 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
+	include 'includes/header-member.php';
 
   	$bookId = $_GET['bookID'];
   	$bookName = get_book_title($pdo, $bookId);
@@ -54,31 +55,7 @@
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
-
 			<div class="rm-book-list-container">
 				<div class="rm-book-list-container">
 					<button onclick="location.href='list_books.php?listID=<?= $listID ?>'; return false;" type="button">Back to Lists</button>

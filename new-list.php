@@ -2,17 +2,17 @@
 	
 	// Include the database connection script
 	require 'includes/database-connection.php';
-
+	include 'includes/header-member.php';
 
 	function add_new_list(PDO $pdo, string $userId, string $listName, string $desc){
 		// start transaction
-    $pdo->beginTransaction();
-    // create new group
-    $sql = "INSERT INTO reading_list (list_name, userID, description, date_created) VALUES (:listName, :userId, :desc, CURDATE());";
-    $stmt = pdo($pdo, $sql, ['listName' => $listName, 'userId' => $userId, 'desc' => $desc]);		
+		$pdo->beginTransaction();
+		// create new group
+		$sql = "INSERT INTO reading_list (list_name, userID, description, date_created) VALUES (:listName, :userId, :desc, CURDATE());";
+		$stmt = pdo($pdo, $sql, ['listName' => $listName, 'userId' => $userId, 'desc' => $desc]);		
 
-    // Commit transaction
-    $pdo->commit();
+		// Commit transaction
+		$pdo->commit();
 	}
 
 $created = False;
@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submitNewList'])) {
         $newListName = $_POST['newListName'];
         $desc = $_POST['listDesc'];
-        // **** CHANGE '1' with the actual userID when login implement 
-        add_new_list($pdo, '1', $newListName, $desc); 
+        add_new_list($pdo, $_SESSION['userID'], $newListName, $desc); 
         $created = True;
     } 
     
@@ -43,29 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	</head>
 
 	<body>
-
-		<header>
-			<div class="header-left">
-				<div class="logo">
-					<img src="imgs/book-logo.jpg" alt="Book Inventory Logo">
-      			</div>
-
-	      		<nav>
-	      			<ul>
-	      				<li><a href="book-cat.php">Book Catalog</a></li>
-	      				<li><a href="about.php">About</a></li>
-			        </ul>
-			    </nav>
-		   	</div>
-
-		    <div class="header-right">
-		    	<ul>
-				<li><a href="groups.php">Groups</a></li>
-		    		<li><a href="list.php">Lists</a></li>
-		    	</ul>
-		    </div>
-		</header>
-
 		<main>
 
 			<div class="list-create-container">
@@ -84,9 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </form>
 				</div>	
         
-				<?php if($created): ?>
-            <p>List "<?php echo $newListName; ?>" has been created.</p>
-        <?php endif; ?>
+				<?php if ($created): ?>
+					<p>List "<?php echo $newListName; ?>" has been created.</p>
+					<?php
+						// Redirect back to list.php after displaying the message
+						header("Location: list.php");
+						exit; // Make sure to exit after redirection
+					?>
+				<?php endif; ?>
 
 			</div>
 
