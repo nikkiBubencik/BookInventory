@@ -4,6 +4,9 @@ include 'includes/header-member.php'; 		// Header file
 
 // Get the book ID from the URL parameter
 $bookId = $_GET['bookId'];
+$bookName = get_book_title($pdo, $bookId);
+  // $bookName = $_GET['bookName'];
+$listName = '';
 
 // get book title from database
 function get_book_title(PDO $pdo, string $bookId) {
