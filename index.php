@@ -20,7 +20,7 @@
 		return $book;
 	}
 
-	$book1 = get_book($pdo, '2');
+	$book = get_book($pdo, '2');
 
 
 
@@ -58,11 +58,11 @@
   					<!-- Create a hyperlink to book.php page with book ID as parameter -->
 
   					<!-- Displaytitle of book -->
-					<a href="book.php?bookID=<?= $book1['bookID'] ?>">
-  						<h2><?= $book1['title'] ?></h2>
+					<a href="book.php?bookID=<?= $book['bookID'] ?>">
+  						<h2><?= $book['title'] ?></h2>
 
   					<!-- Display authors -->
-  					<p><?= $book1['authors'] ?></p>
+  					<p><?= $book['authors'] ?></p>
 					</a>
   				</div>
 
